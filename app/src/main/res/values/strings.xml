@@ -25,6 +25,11 @@
     <string name="content_2">Apabila ada aktifitas mencurigakan\nwarga bisa menulis dibagian sini.</string>
     <string name="informasi_keuangan">Informasi Keuangan</string>
     <string name="content_3">Setiap warga bisa melihat informasi\nkeuangan RT 04 secara transparan.</string>
+    <string name="profilku">Profilku</string>
+    <string name="john_dou">John Dou</string>
+    <string name="john_gmail_com">john@gmail.com</string>
+    <string name="ketua_rt">Ketua RT</string>
+    <string name="keluar_akun">Keluar Akun</string>
     <string-array name="category">
         <item>Warga</item>
         <item>Ketua RT</item>
