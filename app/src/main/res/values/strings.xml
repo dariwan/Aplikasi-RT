@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">ApplikasiRT04</string>
+    <string name="home">Home</string>
+    <string name="finance">Finance</string>
+    <string name="information">Information</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">Profile</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="masukkan_email">Masukkan Email</string>
+    <string name="kata_sandi">Kata Sandi</string>
+    <string name="masukkan_kata_sandi">Masukkan Kata Sandi</string>
+    <string name="kategori">Kategori</string>
+    <string name="masuk">Masuk</string>
+    <string name="daftar_sekarang">Daftar Sekarang</string>
+    <string name="register">Register</string>
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="masukkan_nama_lengkap">Masukkan Nama Lengkap</string>
+    <string name="buat_sekarang">Buat Sekarang</string>
+    <string name="halo_user">Halo, User</string>
+    <string name="informasi_kegiatan">Informasi Kegiatan</string>
+    <string name="content_1">Pada bagian ini setiap warga bisa\nmelihat informasi kegiatan\npada RT 04.</string>
+    <string name="informasi_lingkungan">Informasi Lingkungan</string>
+    <string name="content_2">Apabila ada aktifitas mencurigakan\nwarga bisa menulis dibagian sini.</string>
+    <string name="informasi_keuangan">Informasi Keuangan</string>
+    <string name="content_3">Setiap warga bisa melihat informasi\nkeuangan RT 04 secara transparan.</string>
+    <string-array name="category">
+        <item>Warga</item>
+        <item>Ketua RT</item>
+    </string-array>
+</resources>
