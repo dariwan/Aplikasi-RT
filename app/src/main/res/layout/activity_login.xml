@@ -38,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         app:errorEnabled="true"
+        app:hintEnabled="false"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -45,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/masukkan_email"
+            android:inputType="textEmailAddress"
             android:fontFamily="@font/poppins_bold"
             android:background="@drawable/background_edittext" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -66,6 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         app:errorEnabled="true"
+        app:hintEnabled="false"
         app:passwordToggleEnabled="true"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
@@ -73,54 +76,42 @@
             android:id="@+id/password_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="textPassword"
             android:background="@drawable/background_edittext"
             android:fontFamily="@font/poppins_bold"
             android:hint="@string/masukkan_kata_sandi" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/textView4"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/kategori"
-        android:textSize="15sp"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/password_layout"
         app:layout_constraintStart_toStartOf="@+id/password_layout"
-        app:layout_constraintTop_toBottomOf="@+id/password_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/password_layout">
 
-    <Spinner
-        android:id="@+id/sp_category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="8dp"
-        android:minHeight="40dp"
-        android:entries="@array/category"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"/>
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/login"
+            app:cornerRadius="15dp" />
 
-    <Button
-        android:id="@+id/btn_masuk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/masuk"
-        app:cornerRadius="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/sp_category"
-        app:layout_constraintStart_toStartOf="@+id/sp_category"
-        app:layout_constraintTop_toBottomOf="@+id/sp_category" />
+        <Space
+            android:layout_width="50dp"
+            android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/tv_to_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="@string/daftar_sekarang"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/btn_masuk"
-        app:layout_constraintStart_toStartOf="@+id/btn_masuk"
-        app:layout_constraintTop_toBottomOf="@+id/btn_masuk" />
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/register"
+            app:cornerRadius="15dp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
