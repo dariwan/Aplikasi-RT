@@ -6,16 +6,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rt04.myapplication.R
+import com.rt04.myapplication.databinding.FragmentFinanceBinding
+import com.rt04.myapplication.presentation.finance.adapter.FinancePagerAdapter
 
 class FinanceFragment : Fragment() {
-
+    private lateinit var binding: FragmentFinanceBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_finance, container, false)
+        binding = FragmentFinanceBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupTabLayout()
+    }
+
+    private fun setupTabLayout() {
+        val bundle = Bundle()
+        val sectionsPagerAdapter = FinancePagerAdapter(requireContext(), childFragmentManager, bundle)
+        binding.apply {
+            viewPager.adapter = sectionsPagerAdapter
+            tabLayout.setupWithViewPager(viewPager)
+        }
     }
 
 
