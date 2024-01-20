@@ -6,12 +6,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.information.kegiatan.add.KegiatanKetuaFragment">
 
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/buat_kegiatan"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_back"
+        app:layout_constraintStart_toEndOf="@+id/iv_back"
+        app:layout_constraintTop_toTopOf="@+id/iv_back" />
+
     <Button
         android:id="@+id/btn_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#49C805"
         android:drawableLeft="@drawable/ic_add"
         android:fontFamily="@font/poppins_bold"
@@ -20,9 +41,10 @@
         android:textColor="@color/black"
         app:cornerRadius="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_back" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_kegiatan_ketua"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:padding="3dp"
@@ -31,5 +53,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_add"
         tools:listitem="@layout/kegiatan_ketua_list" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

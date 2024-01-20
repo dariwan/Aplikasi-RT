@@ -72,9 +72,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
                     db.collection("user").document(userId).set(userMap)
                         .addOnSuccessListener {
-
-
-
                             Toast.makeText(this, "Akun Berhasil Dibuat", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this, LoginActivity::class.java)
                             startActivity(intent)

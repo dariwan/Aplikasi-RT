@@ -47,7 +47,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/tv_type_news"
+            android:id="@+id/tv_tempat"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

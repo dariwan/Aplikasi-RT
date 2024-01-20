@@ -139,6 +139,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        android:id="@+id/btn_simpan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -148,5 +149,15 @@
         app:layout_constraintEnd_toEndOf="@+id/tempat_Layout"
         app:layout_constraintStart_toStartOf="@+id/textView17"
         app:layout_constraintTop_toBottomOf="@+id/tempat_Layout" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
