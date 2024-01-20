@@ -62,5 +62,17 @@
         <action
             android:id="@+id/action_kegiatanKetuaFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_kegiatanKetuaFragment_to_updateKegiatanFragment"
+            app:destination="@id/updateKegiatanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateKegiatanFragment"
+        android:name="com.rt04.myapplication.presentation.information.kegiatan.update.UpdateKegiatanFragment"
+        android:label="fragment_update_kegiatan"
+        tools:layout="@layout/fragment_update_kegiatan" >
+        <action
+            android:id="@+id/action_updateKegiatanFragment_to_kegiatanKetuaFragment"
+            app:destination="@id/kegiatanKetuaFragment" />
     </fragment>
 </navigation>

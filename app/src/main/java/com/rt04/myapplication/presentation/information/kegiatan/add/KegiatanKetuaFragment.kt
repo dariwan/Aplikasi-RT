@@ -1,6 +1,7 @@
 package com.rt04.myapplication.presentation.information.kegiatan.add
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +10,17 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import com.rt04.myapplication.R
 import com.rt04.myapplication.core.data.Kegiatan
 import com.rt04.myapplication.databinding.FragmentKegiatanKetuaBinding
 import com.rt04.myapplication.presentation.adapter.KegiatanRtAdapter
+import com.rt04.myapplication.presentation.information.kegiatan.update.UpdateKegiatanFragment
+import com.rt04.myapplication.presentation.information.kegiatan.update.UpdateKegiatanFragment.Companion.EXTRA_ID
+import com.rt04.myapplication.presentation.information.kegiatan.update.UpdateKegiatanFragment.Companion.EXTRA_NAME
 
 class KegiatanKetuaFragment : Fragment(), View.OnClickListener {
 
@@ -45,24 +51,67 @@ class KegiatanKetuaFragment : Fragment(), View.OnClickListener {
         binding.progressBar.visibility = View.VISIBLE
 
         db.collection("kegiatan").get()
-            .addOnSuccessListener {
+            .addOnSuccessListener {result ->
                 binding.progressBar.visibility = View.GONE
-                if (!it.isEmpty){
-                    for (data in it.documents){
-                        val kegiatan: Kegiatan? = data.toObject(Kegiatan::class.java)
-                        if (kegiatan != null){
-                            kegiatanList.add(kegiatan)
-                        }
+
+                for (document in result){
+                    val kegiatan: Kegiatan? = document.toObject(Kegiatan::class.java)
+                    if (kegiatan != null){
+                        kegiatan.id = document.id
+                        kegiatanList.add(kegiatan)
                     }
-                    val adapter = KegiatanRtAdapter(kegiatanList)
-                    binding.rvKegiatanKetua.adapter = adapter
-                    binding.rvKegiatanKetua.layoutManager = LinearLayoutManager(requireContext())
                 }
+                val adapter = KegiatanRtAdapter(kegiatanList)
+                binding.rvKegiatanKetua.adapter = adapter
+                binding.rvKegiatanKetua.layoutManager = LinearLayoutManager(requireContext())
+                adapter.setOnItemClickCallback(object : KegiatanRtAdapter.OnItemClickCallback{
+                    override fun onItemClicked(data: Kegiatan, action: String) {
+                       when(action){
+                           "edit" -> navigateToUpdateFragment(data)
+                           "hapus" -> hapusData()
+                       }
+                    }
+
+                })
+
             }
             .addOnFailureListener {
                 binding.progressBar.visibility = View.VISIBLE
                 Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun hapusData() {
+        binding.progressBar.visibility = View.VISIBLE
+        val mapDelete = mapOf(
+            "topik" to FieldValue.delete(),
+            "deskripsi" to FieldValue.delete(),
+            "tempat" to FieldValue.delete(),
+        )
+
+        val kegiatanId = arguments?.getString(EXTRA_ID)
+
+        if (kegiatanId != null) {
+            db.collection("kegiatan").document(kegiatanId).update(mapDelete)
+                .addOnSuccessListener {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), "Kegiatan berhasil dihapus", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), "Gagal hapus kegiatan", Toast.LENGTH_SHORT).show()
+                }
+        }
+    }
+
+    private fun navigateToUpdateFragment(data: Kegiatan) {
+        val bundle = Bundle().apply {
+            putParcelable(EXTRA_NAME, data)
+            putString(EXTRA_ID, data.id)
+        }
+        Log.d("UpdateKegiatanFragment", "Data kegiatan: $data")
+
+        findNavController().navigate(R.id.action_kegiatanKetuaFragment_to_updateKegiatanFragment, bundle)
     }
 
     private fun setupButton() {

@@ -14,6 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import com.rt04.myapplication.R
 import com.rt04.myapplication.databinding.FragmentAddKegiatanBinding
+import com.rt04.myapplication.presentation.information.kegiatan.update.UpdateKegiatanFragment.Companion.EXTRA_ID
 
 class AddKegiatanFragment : Fragment(), View.OnClickListener {
 
@@ -59,7 +60,7 @@ class AddKegiatanFragment : Fragment(), View.OnClickListener {
 
         db.collection("kegiatan")
             .add(kegiatan)
-            .addOnSuccessListener {
+            .addOnSuccessListener {documentReference ->
                 binding.progressBar.visibility = View.GONE
                 Toast.makeText(requireContext(), "kegiatan berhasil ditambahkan", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_addKegiatanFragment_to_kegiatanKetuaFragment)
