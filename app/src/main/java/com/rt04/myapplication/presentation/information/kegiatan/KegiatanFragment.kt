@@ -6,16 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.rt04.myapplication.R
+import com.rt04.myapplication.databinding.FragmentKegiatanBinding
 
 class KegiatanFragment : Fragment() {
 
+    private lateinit var binding: FragmentKegiatanBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_kegiatan, container, false)
+        binding = FragmentKegiatanBinding.inflate(layoutInflater)
+        return binding.root
     }
 
 

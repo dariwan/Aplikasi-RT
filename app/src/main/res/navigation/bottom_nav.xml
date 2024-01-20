@@ -37,5 +37,30 @@
         android:id="@+id/profileFragment"
         android:name="com.rt04.myapplication.presentation.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_kegiatanKetuaFragment"
+            app:destination="@id/kegiatanKetuaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addKegiatanFragment"
+        android:name="com.rt04.myapplication.presentation.information.kegiatan.add.AddKegiatanFragment"
+        android:label="fragment_add_kegiatan"
+        tools:layout="@layout/fragment_add_kegiatan" >
+        <action
+            android:id="@+id/action_addKegiatanFragment_to_kegiatanKetuaFragment"
+            app:destination="@id/kegiatanKetuaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/kegiatanKetuaFragment"
+        android:name="com.rt04.myapplication.presentation.information.kegiatan.add.KegiatanKetuaFragment"
+        android:label="fragment_kegiatan_ketua"
+        tools:layout="@layout/fragment_kegiatan_ketua" >
+        <action
+            android:id="@+id/action_kegiatanKetuaFragment_to_addKegiatanFragment"
+            app:destination="@id/addKegiatanFragment" />
+        <action
+            android:id="@+id/action_kegiatanKetuaFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>

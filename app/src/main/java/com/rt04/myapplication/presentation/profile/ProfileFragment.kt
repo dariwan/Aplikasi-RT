@@ -5,11 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.rt04.myapplication.R
 import com.rt04.myapplication.core.utils.SessionManager
 import com.rt04.myapplication.databinding.FragmentProfileBinding
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentProfileBinding
     private lateinit var sharedPref: SessionManager
@@ -38,6 +39,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setupView() {
+        binding.btnAdd.setOnClickListener(this)
         binding.tvUsername.text = username
         binding.tvEmail.text = email
         binding.tvCategory.text = category
@@ -46,6 +48,14 @@ class ProfileFragment : Fragment() {
             binding.btnAdd.visibility = View.GONE
         }else{
             binding.btnAdd.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0!!.id){
+            R.id.btn_add ->{
+                findNavController().navigate(R.id.action_profileFragment_to_kegiatanKetuaFragment)
+            }
         }
     }
 

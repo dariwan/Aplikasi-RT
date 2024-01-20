@@ -44,4 +44,17 @@
     <string name="pemasukan_belakangan_ini">Pemasukan belakangan ini</string>
     <string name="lihat_semua"><![CDATA[Lihat Semua >]]></string>
     <string name="buat_kegiatan">Buat Kegiatan</string>
+    <string name="isi_kegiatan">Isi Kegiatan</string>
+    <string name="topik">Topik</string>
+    <string name="isi_topik_kegiatan">Isi Topik Kegiatan</string>
+    <string name="penjelasan_kegiatan">Penjelasan Kegiatan</string>
+    <string name="penjelasan_mengenai_kegiatan">Penjelasan Mengenai Kegiatan</string>
+    <string name="tempat">Tempat</string>
+    <string name="isi_tempat_kegiatan">Isi Tempat Kegiatan</string>
+    <string name="simpan">Simpan</string>
+    <string name="title">title</string>
+    <string name="description">Description\nDescription\nDescription\nDescription</string>
+    <string name="edit">Edit</string>
+    <string name="hapus">Hapus</string>
+    <string name="kegiatanku">Kegiatanku</string>
 </resources>

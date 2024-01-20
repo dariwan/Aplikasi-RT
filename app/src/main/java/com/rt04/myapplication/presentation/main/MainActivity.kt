@@ -2,6 +2,7 @@ package com.rt04.myapplication.presentation.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.Navigation
@@ -32,7 +33,27 @@ class MainActivity : AppCompatActivity() {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         val nav: BottomNavigationView = findViewById(R.id.bottom_navigation)
         nav.itemIconTintList = null
+
+        navController.addOnDestinationChangedListener {_, destination, _ ->
+            if (destination.id == R.id.homeFragment ||
+                destination.id == R.id.financeFragment ||
+                destination.id == R.id.informationFragment ||
+                destination.id == R.id.profileFragment) {
+                showBottomNavigation()
+            } else {
+                hideBottomNavigation()
+            }
+        }
+
         setupWithNavController(binding.bottomNavigation, navController)
+    }
+
+    private fun showBottomNavigation() {
+        binding.bottomNavigation.visibility = View.VISIBLE
+    }
+
+    private fun hideBottomNavigation() {
+        binding.bottomNavigation.visibility = View.GONE
     }
 
 }
