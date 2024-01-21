@@ -7,7 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
 import com.rt04.myapplication.R
 import com.rt04.myapplication.databinding.FragmentAddSpendingBinding
 import java.text.SimpleDateFormat
@@ -17,7 +20,9 @@ class AddSpendingFragment : Fragment(), DatePickerDialog.OnDateSetListener, View
 
     private lateinit var binding: FragmentAddSpendingBinding
     private val calendar = Calendar.getInstance()
+    private var selectedDate: Calendar = Calendar.getInstance()
     private val formatDate =  SimpleDateFormat("dd - MM - yyyy")
+    private var db = Firebase.firestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +41,7 @@ class AddSpendingFragment : Fragment(), DatePickerDialog.OnDateSetListener, View
 
     private fun setupButton() {
         binding.ivBack.setOnClickListener(this)
+        binding.btnSubmit.setOnClickListener(this)
     }
 
     private fun dialogDatePickerView() {
@@ -64,7 +70,37 @@ class AddSpendingFragment : Fragment(), DatePickerDialog.OnDateSetListener, View
             R.id.iv_back -> {
                 findNavController().navigate(R.id.action_addSpendingFragment_to_reportSpendingFragment)
             }
+            R.id.btn_submit -> {
+                addSpending()
+            }
         }
+    }
+
+    private fun addSpending() {
+        val nominal = binding.nominalEditText.text.toString()
+        val nama = binding.namaEditText.text.toString()
+        val tanggal = formatDate.format(selectedDate.timeInMillis)
+
+        val addIncome = hashMapOf(
+            "jumlah" to nominal,
+            "nama" to nama,
+            "tanggal" to tanggal
+        )
+
+        binding.progressBar.visibility = View.VISIBLE
+
+        db.collection("pengeluaran")
+            .add(addIncome)
+            .addOnSuccessListener {
+                binding.progressBar.visibility = View.GONE
+                Toast.makeText(requireContext(), "Data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+
+                findNavController().navigate(R.id.action_addSpendingFragment_to_reportSpendingFragment)
+            }
+            .addOnFailureListener {
+                binding.progressBar.visibility = View.VISIBLE
+                Toast.makeText(requireContext(), "Data gagal ditambahkan", Toast.LENGTH_SHORT).show()
+            }
     }
 
 
