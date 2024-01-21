@@ -5,16 +5,38 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.rt04.myapplication.R
+import com.rt04.myapplication.databinding.FragmentIncomeBinding
 
-class IncomeFragment : Fragment() {
+class IncomeFragment : Fragment(), View.OnClickListener {
+    private lateinit var binding: FragmentIncomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_income, container, false)
+        binding = FragmentIncomeBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupButton()
+
+    }
+
+    private fun setupButton() {
+        binding.tvMore.setOnClickListener(this)
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0!!.id){
+            R.id.tv_more -> {
+                findNavController().navigate(R.id.action_financeFragment_to_reportIncomeFragment)
+            }
+        }
     }
 
 

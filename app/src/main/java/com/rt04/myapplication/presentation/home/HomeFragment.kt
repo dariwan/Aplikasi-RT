@@ -40,12 +40,16 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     private fun initializeComponent() {
         binding.cvInformasiKegiatan.setOnClickListener(this)
+        binding.cvInformasiKeuangan.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
         when(p0!!.id){
             R.id.cv_informasi_kegiatan -> {
                 findNavController().navigate(R.id.action_homeFragment_to_kegiatanFragment)
+            }
+            R.id.cv_informasi_keuangan ->{
+                findNavController().navigate(R.id.action_homeFragment_to_financeFragment)
             }
         }
     }

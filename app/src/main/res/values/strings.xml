@@ -58,4 +58,20 @@
     <string name="hapus">Hapus</string>
     <string name="kegiatanku">Kegiatanku</string>
     <string name="edit_kegiatan">Edit Kegiatan</string>
+    <string name="masukkan_jumlah_pemasukan">Masukkan Jumlah Pemasukan</string>
+    <string name="masukkan_nominal">Masukkan Nominal</string>
+    <string name="nama_pemasukkan">Nama Pemasukkan</string>
+    <string name="masukkan_nama">Masukkan Nama</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="tambah_pemasukan">Tambah Pemasukan</string>
+    <string name="isi_pemasukan">Isi Pemasukan</string>
+    <string name="isi_pengeluaran">Isi Pengeluaran</string>
+    <string name="masukkan_jumlah_pengeluaran">Masukkan Jumlah Pengeluaran</string>
+    <string name="nama_pengeluaran">Nama Pengeluaran</string>
+    <string name="tambah_pengeluaran">Tambah Pengeluaran</string>
+    <string name="tambah_data">Tambah Data</string>
+    <string name="kembali">Kembali</string>
+    <string name="pengeluaran_belakangan_ini">Pengeluaran belakangan ini</string>
+    <string name="membeli_kopi">Membeli Kopi</string>
+    <string name="_1_000_000">1.000.000</string>
 </resources>
