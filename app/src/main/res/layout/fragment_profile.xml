@@ -158,6 +158,18 @@
         app:layout_constraintTop_toBottomOf="@+id/view3" />
 
     <Button
+        android:id="@+id/btn_laporan"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/laporanku"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_add"
+        app:layout_constraintStart_toStartOf="@+id/btn_add"
+        app:layout_constraintTop_toBottomOf="@+id/btn_add" />
+
+    <Button
         android:id="@+id/btn_logout"
         android:layout_width="250dp"
         android:layout_height="wrap_content"

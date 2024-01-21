@@ -7,7 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
 import com.rt04.myapplication.R
 import com.rt04.myapplication.databinding.FragmentAddIncomeBinding
 import java.text.SimpleDateFormat
@@ -17,7 +20,9 @@ class AddIncomeFragment : Fragment(), DatePickerDialog.OnDateSetListener, View.O
 
     private lateinit var binding: FragmentAddIncomeBinding
     private val calendar = Calendar.getInstance()
+    private var selectedDate: Calendar = Calendar.getInstance()
     private val formatDate =  SimpleDateFormat("dd - MM - yyyy")
+    private var db = Firebase.firestore
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -35,6 +40,7 @@ class AddIncomeFragment : Fragment(), DatePickerDialog.OnDateSetListener, View.O
 
     private fun setupButton() {
         binding.ivBack.setOnClickListener(this)
+        binding.btnSubmit.setOnClickListener(this)
     }
 
     private fun dialogDatePickerView() {
@@ -50,8 +56,8 @@ class AddIncomeFragment : Fragment(), DatePickerDialog.OnDateSetListener, View.O
     }
 
     override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
-        calendar.set(p1, p2, p3)
-        displayFormatDate(calendar.timeInMillis)
+        selectedDate.set(p1, p2, p3)
+        displayFormatDate(selectedDate.timeInMillis)
     }
 
     private fun displayFormatDate(timeInMillis: Long) {
@@ -63,7 +69,37 @@ class AddIncomeFragment : Fragment(), DatePickerDialog.OnDateSetListener, View.O
             R.id.iv_back -> {
                 findNavController().navigate(R.id.action_addIncomeFragment_to_reportIncomeFragment)
             }
+            R.id.btn_submit -> {
+                addIncome()
+            }
         }
+    }
+
+    private fun addIncome() {
+        val nominal = binding.nominalEditText.text.toString()
+        val nama = binding.namaEditText.text.toString()
+        val tanggal = formatDate.format(selectedDate.timeInMillis)
+
+        val addIncome = hashMapOf(
+            "jumlah" to nominal,
+            "nama" to nama,
+            "tanggal" to tanggal
+        )
+
+        binding.progressBar.visibility = View.VISIBLE
+
+        db.collection("pemasukan")
+            .add(addIncome)
+            .addOnSuccessListener {
+                binding.progressBar.visibility = View.GONE
+                Toast.makeText(requireContext(), "Data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+
+                findNavController().navigate(R.id.action_addIncomeFragment_to_reportIncomeFragment)
+            }
+            .addOnFailureListener {
+                binding.progressBar.visibility = View.VISIBLE
+                Toast.makeText(requireContext(), "Data gagal ditambahkan", Toast.LENGTH_SHORT).show()
+            }
     }
 
 }
