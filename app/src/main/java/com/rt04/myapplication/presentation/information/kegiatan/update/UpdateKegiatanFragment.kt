@@ -74,6 +74,7 @@ class UpdateKegiatanFragment : Fragment(), View.OnClickListener {
                         putString(EXTRA_ID, kegiatanId)
                     }
 
+
                     Toast.makeText(requireContext(), "Kegiatan berhasil diubah", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_updateKegiatanFragment_to_kegiatanKetuaFragment, bundle)
                 }

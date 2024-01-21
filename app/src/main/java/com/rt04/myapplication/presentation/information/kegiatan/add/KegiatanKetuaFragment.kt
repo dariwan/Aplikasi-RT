@@ -27,6 +27,7 @@ class KegiatanKetuaFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentKegiatanKetuaBinding
     private lateinit var kegiatanList: ArrayList<Kegiatan>
     private var db = Firebase.firestore
+    private var selectedKegiatanId: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,8 +68,14 @@ class KegiatanKetuaFragment : Fragment(), View.OnClickListener {
                 adapter.setOnItemClickCallback(object : KegiatanRtAdapter.OnItemClickCallback{
                     override fun onItemClicked(data: Kegiatan, action: String) {
                        when(action){
-                           "edit" -> navigateToUpdateFragment(data)
-                           "hapus" -> hapusData()
+                           "edit" -> {
+                               selectedKegiatanId = data.id
+                               navigateToUpdateFragment(data)
+                           }
+                           "hapus" -> {
+                               selectedKegiatanId = data.id
+                               hapusData()
+                           }
                        }
                     }
 
@@ -83,18 +90,15 @@ class KegiatanKetuaFragment : Fragment(), View.OnClickListener {
 
     private fun hapusData() {
         binding.progressBar.visibility = View.VISIBLE
-        val mapDelete = mapOf(
-            "topik" to FieldValue.delete(),
-            "deskripsi" to FieldValue.delete(),
-            "tempat" to FieldValue.delete(),
-        )
 
-        val kegiatanId = arguments?.getString(EXTRA_ID)
+        val kegiatanId = selectedKegiatanId
+        Log.e("hapus", "id: $kegiatanId")
 
         if (kegiatanId != null) {
-            db.collection("kegiatan").document(kegiatanId).update(mapDelete)
+            db.collection("kegiatan").document(kegiatanId).delete()
                 .addOnSuccessListener {
                     binding.progressBar.visibility = View.GONE
+                    setupRv()
                     Toast.makeText(requireContext(), "Kegiatan berhasil dihapus", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {
@@ -108,6 +112,7 @@ class KegiatanKetuaFragment : Fragment(), View.OnClickListener {
         val bundle = Bundle().apply {
             putParcelable(EXTRA_NAME, data)
             putString(EXTRA_ID, data.id)
+            Log.e("hapus", "${data.id}")
         }
         Log.d("UpdateKegiatanFragment", "Data kegiatan: $data")
 

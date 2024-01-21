@@ -60,7 +60,7 @@ class AddKegiatanFragment : Fragment(), View.OnClickListener {
 
         db.collection("kegiatan")
             .add(kegiatan)
-            .addOnSuccessListener {documentReference ->
+            .addOnSuccessListener {
                 binding.progressBar.visibility = View.GONE
                 Toast.makeText(requireContext(), "kegiatan berhasil ditambahkan", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_addKegiatanFragment_to_kegiatanKetuaFragment)
