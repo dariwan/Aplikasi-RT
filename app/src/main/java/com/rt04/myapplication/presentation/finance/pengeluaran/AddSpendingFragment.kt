@@ -82,7 +82,7 @@ class AddSpendingFragment : Fragment(), DatePickerDialog.OnDateSetListener, View
         val tanggal = formatDate.format(selectedDate.timeInMillis)
 
         val addIncome = hashMapOf(
-            "jumlah" to nominal,
+            "jumlah" to nominal.toInt(),
             "nama" to nama,
             "tanggal" to tanggal
         )

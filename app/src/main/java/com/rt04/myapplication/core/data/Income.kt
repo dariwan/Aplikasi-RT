@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Income(
-    val jumlah : String? = null,
+    val jumlah : Int? = null,
     val nama : String? = null,
     val tanggal : String? = null,
 ): Parcelable

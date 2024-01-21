@@ -10,7 +10,7 @@ import com.rt04.myapplication.databinding.ReportFinanceListBinding
 class FinanceIncomeAdapter(private val incomeList: ArrayList<Income>): RecyclerView.Adapter<FinanceIncomeAdapter.MyViewHolder>() {
     class MyViewHolder(val binding: ReportFinanceListBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(income: Income){
-            binding.nominalFinance.text = income.jumlah
+            binding.nominalFinance.text = income.jumlah.toString()
             binding.descFinance.text = income.nama
             binding.financeDate.text = income.tanggal
         }
