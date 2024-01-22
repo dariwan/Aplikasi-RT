@@ -61,7 +61,7 @@
         android:layout_marginTop="24dp"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/topik"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_content" />
 
@@ -72,6 +72,7 @@
         android:layout_marginHorizontal="24dp"
         app:hintEnabled="false"
         app:layout_constraintBottom_toBottomOf="@+id/textView15"
+        app:layout_constraintEnd_toEndOf="@+id/penjelasan_kegiatan_Layout"
         app:layout_constraintStart_toEndOf="@+id/textView15"
         app:layout_constraintTop_toTopOf="@+id/textView15">
 
@@ -92,7 +93,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/penjelasan_kegiatan"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/topik_Layout" />
 
@@ -123,7 +124,7 @@
         android:layout_marginTop="32dp"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/tempat"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/penjelasan_kegiatan_Layout"
         app:layout_constraintTop_toBottomOf="@+id/penjelasan_kegiatan_Layout" />
 
@@ -134,6 +135,7 @@
         android:layout_marginHorizontal="24dp"
         app:hintEnabled="false"
         app:layout_constraintBottom_toBottomOf="@+id/textView17"
+        app:layout_constraintEnd_toEndOf="@+id/penjelasan_kegiatan_Layout"
         app:layout_constraintStart_toEndOf="@+id/textView17"
         app:layout_constraintTop_toTopOf="@+id/textView17">
 

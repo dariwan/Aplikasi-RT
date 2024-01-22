@@ -64,7 +64,7 @@
             android:layout_marginTop="24dp"
             android:fontFamily="@font/poppins_bold"
             android:text="@string/topik"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_title_content" />
 
@@ -75,7 +75,7 @@
             android:layout_marginHorizontal="24dp"
             app:hintEnabled="false"
             app:layout_constraintBottom_toBottomOf="@+id/textView15"
-            app:layout_constraintEnd_toEndOf="@+id/imageView7"
+            app:layout_constraintEnd_toEndOf="@+id/masalah_Layout"
             app:layout_constraintStart_toEndOf="@+id/textView15"
             app:layout_constraintTop_toTopOf="@+id/textView15">
 
@@ -96,7 +96,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/poppins_bold"
             android:text="@string/masalah"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/textView15"
             app:layout_constraintTop_toBottomOf="@+id/topik_Layout" />
 
@@ -127,7 +127,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/poppins_bold"
             android:text="@string/nama_pelapor"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/masalah_Layout"
             app:layout_constraintTop_toBottomOf="@+id/masalah_Layout" />
 
@@ -157,7 +157,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/poppins_bold"
             android:text="@string/kategori"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/nama_Layout"
             app:layout_constraintTop_toBottomOf="@+id/nama_Layout" />
 

@@ -1,6 +1,7 @@
 package com.rt04.myapplication.presentation.splashscreen
 
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -31,6 +32,7 @@ class SplashScreenActivity : AppCompatActivity() {
         }
 
         progressBarSetup()
+        saveLoginInfo()
     }
 
     private fun progressBarSetup() {
@@ -38,5 +40,24 @@ class SplashScreenActivity : AppCompatActivity() {
         ObjectAnimator.ofInt(binding.progressBar, "progress", 1000)
             .setDuration(3000)
             .start()
+    }
+
+    private fun saveLoginInfo(){
+        val sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.apply(){
+            putBoolean(LoginActivity.IS_LOGIN, true)
+        }.apply()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, Context.MODE_PRIVATE)
+        val isLogin = sharedPreferences.getBoolean(LoginActivity.IS_LOGIN, false)
+        if (isLogin){
+            val intentToMain = Intent(this@SplashScreenActivity, MainActivity::class.java)
+            startActivity(intentToMain)
+            finish()
+        }
     }
 }

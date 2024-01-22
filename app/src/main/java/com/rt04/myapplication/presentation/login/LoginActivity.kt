@@ -1,5 +1,6 @@
 package com.rt04.myapplication.presentation.login
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -64,10 +65,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this){ task ->
                 binding.progressBar.visibility = View.GONE
-                sharedPref.apply {
-                    setBooleanPref(KEY_IS_LOGIN, true)
-                }
+//                sharedPref.apply {
+//                    setBooleanPref(KEY_IS_LOGIN, true)
+//                }
+
+
                 if (task.isSuccessful){
+                    saveLoginInfo()
                     checkUserRole(auth.currentUser?.uid ?: "")
 
                 } else {
@@ -100,14 +104,38 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             }
     }
 
-    override fun onStart() {
-        super.onStart()
-        val isLogin = sharedPref.isLogin
-        Log.e("login", "$isLogin")
+    private fun saveLoginInfo(){
+        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.apply(){
+            putBoolean(IS_LOGIN, true)
+        }.apply()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val isLogin = sharedPreferences.getBoolean(IS_LOGIN, false)
         if (isLogin){
-            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
+            val intentToMain = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intentToMain)
+            finish()
         }
+    }
+
+//    override fun onStart() {
+//        super.onStart()
+//        val isLogin = sharedPref.isLogin
+//        Log.e("login", "$isLogin")
+//        if (isLogin){
+//            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+//            startActivity(intent)
+//        }
+//    }
+
+    companion object{
+        const val PREFS_NAME = "rt04_app_pref"
+        const val IS_LOGIN = "login"
     }
 }
