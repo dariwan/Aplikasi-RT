@@ -83,18 +83,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         db.collection("user").document(userId).get()
             .addOnSuccessListener { document ->
-                val username = document.getString("username")
-                val email = document.getString("email")
                 val kategori = document.getString("category")
-                sharedPref.apply {
-                    setStringPref(KEY_NAME, username!!)
-                    setStringPref(KEY_EMAIL, email!!)
-                    setStringPref(KEY_ROLE, kategori!!)
-                }
                 Log.e("tes", "$kategori")
                 if (document.exists()){
                     if (kategori == "Warga" || kategori == "Ketua RT") {
-                        val intent = Intent(this, ProfileFragment::class.java)
+                        val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                         finish()
                     }
@@ -110,6 +103,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     override fun onStart() {
         super.onStart()
         val isLogin = sharedPref.isLogin
+        Log.e("login", "$isLogin")
         if (isLogin){
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK

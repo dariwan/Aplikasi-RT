@@ -1,5 +1,6 @@
 package com.rt04.myapplication.presentation.report.add
 
+import android.Manifest
 import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -36,6 +37,17 @@ class AddReportFragment : Fragment(), View.OnClickListener {
     private var selectedImageUri: Uri? = null
     private val PICK_IMAGE_REQUEST = 1
 
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                Toast.makeText(requireContext(), "Notifications permission granted", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Notifications permission rejected", Toast.LENGTH_SHORT).show()
+            }
+        }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -47,8 +59,11 @@ class AddReportFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (Build.VERSION.SDK_INT >= 33) {
+            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+
         setupButton()
-        requestPermissionLauncher
     }
 
     private fun setupButton() {
@@ -124,7 +139,6 @@ class AddReportFragment : Fragment(), View.OnClickListener {
         Log.d("Notification", "Trying to show notification.")
         Log.d("Notification", "Topik: $topik, Kategori: $kategori")
 
-
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
                 android.Manifest.permission.VIBRATE
@@ -141,16 +155,7 @@ class AddReportFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private val requestPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted: Boolean ->
-            if (isGranted) {
-                Toast.makeText(requireContext(), "Notifications permission granted", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(requireContext(), "Notifications permission rejected", Toast.LENGTH_SHORT).show()
-            }
-        }
+
 
     private fun uploadGambar(imageUri: Uri, callback: (String) -> Unit) {
         val storageRef = FirebaseStorage.getInstance().reference

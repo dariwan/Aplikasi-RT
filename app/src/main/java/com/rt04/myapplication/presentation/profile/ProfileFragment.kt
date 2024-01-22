@@ -14,6 +14,7 @@ import com.google.firebase.firestore.firestore
 import com.rt04.myapplication.R
 import com.rt04.myapplication.core.utils.SessionManager
 import com.rt04.myapplication.databinding.FragmentProfileBinding
+import com.rt04.myapplication.presentation.login.LoginActivity
 import com.rt04.myapplication.presentation.register.RegisterActivity
 
 class ProfileFragment : Fragment(), View.OnClickListener {
@@ -57,6 +58,12 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 binding.tvUsername.text = username
                 binding.tvEmail.text = email
                 binding.tvCategory.text = role
+
+                if (role == "Warga"){
+                    binding.btnAdd.visibility = View.GONE
+                } else {
+                    binding.btnAdd.visibility = View.VISIBLE
+                }
             }
     }
 
@@ -83,7 +90,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             }
             R.id.btn_logout -> {
                 sharedPref.clearData()
-                val intent = Intent(requireContext(), RegisterActivity::class.java)
+                val intent = Intent(requireContext(), LoginActivity::class.java)
                 startActivity(intent)
             }
         }

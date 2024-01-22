@@ -49,7 +49,7 @@ class HomeFragment : Fragment() {
         db.collection("user").document(userId).get()
             .addOnSuccessListener { document ->
                 val username = document.getString("username")
-                binding.tvUsername.text = "Hallo, $username"
+                binding?.tvUsername?.text = "Hallo, $username"
             }
     }
 
