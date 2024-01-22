@@ -10,7 +10,8 @@ import com.rt04.myapplication.databinding.ReportFinanceListBinding
 class FinanceSpendingAdapter(private val spendingList: ArrayList<Spending>): RecyclerView.Adapter<FinanceSpendingAdapter.MyViewHolder>() {
     class MyViewHolder(val binding: ReportFinanceListBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(spending: Spending){
-            binding.nominalFinance.text = spending.jumlah.toString()
+            val jumlah = spending.jumlah?.toInt()
+            binding.nominalFinance.text = jumlah.toString()
             binding.descFinance.text = spending.nama
             binding.financeDate.text = spending.tanggal
         }

@@ -3,13 +3,17 @@ package com.rt04.myapplication.presentation.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
 import com.rt04.myapplication.R
+import com.rt04.myapplication.core.utils.Constant.KEY_EMAIL
 import com.rt04.myapplication.core.utils.Constant.KEY_IS_LOGIN
+import com.rt04.myapplication.core.utils.Constant.KEY_NAME
+import com.rt04.myapplication.core.utils.Constant.KEY_ROLE
 import com.rt04.myapplication.core.utils.SessionManager
 import com.rt04.myapplication.databinding.ActivityLoginBinding
 import com.rt04.myapplication.presentation.main.MainActivity
@@ -55,8 +59,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         val email = binding.emailEditText.text.toString()
         val password = binding.passwordEditText.text.toString()
 
+        binding.progressBar.visibility = View.VISIBLE
+
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this){ task ->
+                binding.progressBar.visibility = View.GONE
                 sharedPref.apply {
                     setBooleanPref(KEY_IS_LOGIN, true)
                 }
@@ -67,22 +74,30 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     Toast.makeText(this, task.exception.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
+            .addOnFailureListener {
+                binding.progressBar.visibility = View.VISIBLE
+            }
     }
 
     private fun checkUserRole(userId: String) {
 
         db.collection("user").document(userId).get()
             .addOnSuccessListener { document ->
-                val category = document.getString("category")
+                val username = document.getString("username")
+                val email = document.getString("email")
+                val kategori = document.getString("category")
+                sharedPref.apply {
+                    setStringPref(KEY_NAME, username!!)
+                    setStringPref(KEY_EMAIL, email!!)
+                    setStringPref(KEY_ROLE, kategori!!)
+                }
+                Log.e("tes", "$kategori")
                 if (document.exists()){
-                    if (category == "Warga") {
+                    if (kategori == "Warga" || kategori == "Ketua RT") {
                         val intent = Intent(this, ProfileFragment::class.java)
                         startActivity(intent)
-                    } else if (category == "Ketua RT"){
-                        val intent = Intent(this, ProfileFragment::class.java)
-                        startActivity(intent)
+                        finish()
                     }
-                    finish()
                 }else{
                     Toast.makeText(this, "Data tidak ditemukan", Toast.LENGTH_SHORT).show()
                 }

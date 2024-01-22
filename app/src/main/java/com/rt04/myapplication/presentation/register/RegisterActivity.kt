@@ -38,12 +38,17 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initializeComponen() {
         binding.btnRegister.setOnClickListener(this)
+        binding.btnLogin.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
         when(p0!!.id){
             R.id.btn_register ->{
                 register()
+            }
+            R.id.btn_login -> {
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
             }
         }
     }
@@ -54,6 +59,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         val password = binding.passwordEditText.text.toString()
         val category = binding.spCategory.selectedItem.toString()
 
+        binding.progressBar.visibility = View.VISIBLE
+
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -63,20 +70,22 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                         "category" to category
                     )
                     val userId = FirebaseAuth.getInstance().currentUser!!.uid
-                    sharedPref.apply {
-                        setStringPref(KEY_TOKEN, userId)
-                        setStringPref(KEY_NAME, username)
-                        setStringPref(KEY_ROLE, category)
-                        setStringPref(KEY_EMAIL, email)
-                    }
+//                    sharedPref.apply {
+//                        setStringPref(KEY_TOKEN, userId)
+//                        setStringPref(KEY_NAME, username)
+//                        setStringPref(KEY_ROLE, category)
+//                        setStringPref(KEY_EMAIL, email)
+//                    }
 
                     db.collection("user").document(userId).set(userMap)
                         .addOnSuccessListener {
+                            binding.progressBar.visibility = View.GONE
                             Toast.makeText(this, "Akun Berhasil Dibuat", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this, LoginActivity::class.java)
                             startActivity(intent)
                         }
                         .addOnFailureListener {e ->
+                            binding.progressBar.visibility = View.VISIBLE
                             Toast.makeText(this, "Gagal Membuat Akun ${e.message}", Toast.LENGTH_SHORT).show()
                         }
 

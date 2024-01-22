@@ -1,10 +1,12 @@
 package com.rt04.myapplication.presentation.finance
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import com.rt04.myapplication.R
@@ -30,18 +32,43 @@ class FinanceFragment : Fragment() {
         setupView()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupView() {
+        var income = 0.0
+        var spending = 0.0
 
+        calculateTotal("pemasukan") { calculatedIncome ->
+            income = calculatedIncome
+
+            calculateTotal("pengeluaran") { calculatedSpending ->
+                spending = calculatedSpending
+
+                val totalWithoutDecimal = (income - spending).toInt()
+                binding.tvTotalFinance.text = "Total: ${totalWithoutDecimal}"
+            }
+        }
     }
 
-    private fun calculateTotal(collection: String){
+    private fun calculateTotal(collection: String, callback: (Double) -> Unit){
+        var total = 0.0
         db.collection(collection)
             .get()
-            .addOnSuccessListener { result ->
-                var total = 0
-                for (document in result){
-                    val jumlahInt = document
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful){
+                    for (document in task.result){
+                        val jumlah = document.getDouble("jumlah")
+                        jumlah.let {
+                            if (it != null) {
+                                total += it
+                            }
+                        }
+                    }
+                    callback(total)
+
+                } else{
+                    Toast.makeText(requireContext(), "Gagal ${task.exception}", Toast.LENGTH_SHORT).show()
                 }
+
             }
     }
 

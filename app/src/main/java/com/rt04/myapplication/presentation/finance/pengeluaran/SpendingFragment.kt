@@ -35,11 +35,48 @@ class SpendingFragment : Fragment(), View.OnClickListener {
 
         setupButton()
         setupRv()
+
+        setupView()
     }
 
     private fun setupButton() {
         binding.tvMore.setOnClickListener(this)
         binding
+    }
+
+    private fun setupView() {
+        var spending = 0.0
+
+        calculateTotal("pengeluaran") { calculatedIncome ->
+            spending = calculatedIncome
+
+            val incomeWithoutDecimal = spending.toInt()
+            binding.tvNominalIncome.text = "Rp.${incomeWithoutDecimal}"
+        }
+    }
+
+    private fun calculateTotal(collection: String, callback: (Double) -> Unit) {
+        var total = 0.0
+        db.collection(collection)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    for (document in task.result) {
+                        val jumlah = document.getDouble("jumlah")
+                        jumlah.let {
+                            if (it != null) {
+                                total += it
+                            }
+                        }
+                    }
+                    callback(total)
+
+                } else {
+                    Toast.makeText(requireContext(), "Gagal ${task.exception}", Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+            }
     }
 
     override fun onClick(p0: View?) {

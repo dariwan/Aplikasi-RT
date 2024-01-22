@@ -6,15 +6,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
 import com.rt04.myapplication.R
+import com.rt04.myapplication.core.data.Kegiatan
 import com.rt04.myapplication.core.utils.SessionManager
 import com.rt04.myapplication.databinding.FragmentHomeBinding
+import com.rt04.myapplication.presentation.adapter.KegiatanAdapter
 
-class HomeFragment : Fragment(), View.OnClickListener {
+class HomeFragment : Fragment() {
     private lateinit var sharedPref: SessionManager
     private var username: String? = null
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var kegiatanList: ArrayList<Kegiatan>
+    private var db = Firebase.firestore
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -26,32 +36,54 @@ class HomeFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initializeComponent()
         sharedPref = SessionManager(requireContext())
         username = sharedPref.getUsername
 
         setupView()
+        setupRv()
+        setUsername()
+    }
+
+    private fun setUsername() {
+        val userId = FirebaseAuth.getInstance().currentUser!!.uid
+        db.collection("user").document(userId).get()
+            .addOnSuccessListener { document ->
+                val username = document.getString("username")
+                binding.tvUsername.text = "Hallo, $username"
+            }
     }
 
     @SuppressLint("SetTextI18n")
     private fun setupView() {
-        binding.tvUsername.text = "Hallo, $username"
+
     }
 
-    private fun initializeComponent() {
-        binding.cvInformasiKegiatan.setOnClickListener(this)
-        binding.cvInformasiKeuangan.setOnClickListener(this)
-    }
 
-    override fun onClick(p0: View?) {
-        when(p0!!.id){
-            R.id.cv_informasi_kegiatan -> {
-                findNavController().navigate(R.id.action_homeFragment_to_kegiatanFragment)
+    private fun setupRv() {
+        kegiatanList = arrayListOf()
+        db = FirebaseFirestore.getInstance()
+
+        binding.progressBar.visibility = View.VISIBLE
+
+        db.collection("kegiatan").get()
+            .addOnSuccessListener {
+                binding.progressBar.visibility = View.GONE
+                if (!it.isEmpty){
+                    for (data in it.documents){
+                        val kegiatan: Kegiatan? = data.toObject(Kegiatan::class.java)
+                        if (kegiatan != null){
+                            kegiatanList.add(kegiatan)
+                        }
+                    }
+                    val adapter = KegiatanAdapter(kegiatanList)
+                    binding.rvKegiatan.adapter = adapter
+                    binding.rvKegiatan.layoutManager = LinearLayoutManager(requireContext())
+                }
             }
-            R.id.cv_informasi_keuangan ->{
-                findNavController().navigate(R.id.action_homeFragment_to_financeFragment)
+            .addOnFailureListener {
+                binding.progressBar.visibility = View.VISIBLE
+                Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
             }
-        }
     }
 
 
