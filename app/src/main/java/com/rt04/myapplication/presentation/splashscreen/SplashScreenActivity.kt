@@ -32,7 +32,7 @@ class SplashScreenActivity : AppCompatActivity() {
         }
 
         progressBarSetup()
-        saveLoginInfo()
+        //saveLoginInfo()
     }
 
     private fun progressBarSetup() {

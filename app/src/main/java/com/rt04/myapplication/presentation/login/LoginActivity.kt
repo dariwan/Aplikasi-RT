@@ -45,8 +45,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         when(p0!!.id){
             R.id.btn_login -> {
                 login()
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
             }
 
             R.id.btn_register -> {

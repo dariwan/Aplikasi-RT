@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -45,12 +46,21 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUsername() {
-        val userId = FirebaseAuth.getInstance().currentUser!!.uid
-        db.collection("user").document(userId).get()
-            .addOnSuccessListener { document ->
-                val username = document.getString("username")
-                binding?.tvUsername?.text = "Hallo, $username"
-            }
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            db.collection("user").document(userId).get()
+                .addOnSuccessListener { document ->
+                    val username = document.getString("username")
+                    val image = document.getString("photoUrl")
+
+                    Glide.with(requireContext())
+                        .load(image)
+                        .into(binding.ivPhotoProfile)
+
+
+                    binding?.tvUsername?.text = "Hallo, $username"
+                }
+        }
     }
 
     @SuppressLint("SetTextI18n")
