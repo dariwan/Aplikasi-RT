@@ -10,15 +10,12 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import com.rt04.myapplication.R
 import com.rt04.myapplication.core.data.Kegiatan
 import com.rt04.myapplication.databinding.FragmentKegiatanKetuaBinding
 import com.rt04.myapplication.presentation.adapter.KegiatanRtAdapter
-import com.rt04.myapplication.presentation.information.kegiatan.update.UpdateKegiatanFragment
 import com.rt04.myapplication.presentation.information.kegiatan.update.UpdateKegiatanFragment.Companion.EXTRA_ID
 import com.rt04.myapplication.presentation.information.kegiatan.update.UpdateKegiatanFragment.Companion.EXTRA_NAME
 
@@ -32,7 +29,7 @@ class KegiatanKetuaFragment : Fragment(), View.OnClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentKegiatanKetuaBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -52,31 +49,30 @@ class KegiatanKetuaFragment : Fragment(), View.OnClickListener {
         binding.progressBar.visibility = View.VISIBLE
 
         db.collection("kegiatan").get()
-            .addOnSuccessListener {result ->
+            .addOnSuccessListener { result ->
                 binding.progressBar.visibility = View.GONE
 
-                for (document in result){
-                    val kegiatan: Kegiatan? = document.toObject(Kegiatan::class.java)
-                    if (kegiatan != null){
-                        kegiatan.id = document.id
-                        kegiatanList.add(kegiatan)
-                    }
+                for (document in result) {
+                    val kegiatan: Kegiatan = document.toObject(Kegiatan::class.java)
+                    kegiatan.id = document.id
+                    kegiatanList.add(kegiatan)
                 }
                 val adapter = KegiatanRtAdapter(kegiatanList)
                 binding.rvKegiatanKetua.adapter = adapter
                 binding.rvKegiatanKetua.layoutManager = LinearLayoutManager(requireContext())
-                adapter.setOnItemClickCallback(object : KegiatanRtAdapter.OnItemClickCallback{
+                adapter.setOnItemClickCallback(object : KegiatanRtAdapter.OnItemClickCallback {
                     override fun onItemClicked(data: Kegiatan, action: String) {
-                       when(action){
-                           "edit" -> {
-                               selectedKegiatanId = data.id
-                               navigateToUpdateFragment(data)
-                           }
-                           "hapus" -> {
-                               selectedKegiatanId = data.id
-                               hapusData()
-                           }
-                       }
+                        when (action) {
+                            "edit" -> {
+                                selectedKegiatanId = data.id
+                                navigateToUpdateFragment(data)
+                            }
+
+                            "hapus" -> {
+                                selectedKegiatanId = data.id
+                                hapusData()
+                            }
+                        }
                     }
 
                 })
@@ -99,11 +95,16 @@ class KegiatanKetuaFragment : Fragment(), View.OnClickListener {
                 .addOnSuccessListener {
                     binding.progressBar.visibility = View.GONE
                     setupRv()
-                    Toast.makeText(requireContext(), "Kegiatan berhasil dihapus", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Kegiatan berhasil dihapus",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 .addOnFailureListener {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), "Gagal hapus kegiatan", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Gagal hapus kegiatan", Toast.LENGTH_SHORT)
+                        .show()
                 }
         }
     }
@@ -116,7 +117,10 @@ class KegiatanKetuaFragment : Fragment(), View.OnClickListener {
         }
         Log.d("UpdateKegiatanFragment", "Data kegiatan: $data")
 
-        findNavController().navigate(R.id.action_kegiatanKetuaFragment_to_updateKegiatanFragment, bundle)
+        findNavController().navigate(
+            R.id.action_kegiatanKetuaFragment_to_updateKegiatanFragment,
+            bundle
+        )
     }
 
     private fun setupButton() {
@@ -125,10 +129,11 @@ class KegiatanKetuaFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-        when(p0!!.id){
+        when (p0!!.id) {
             R.id.btn_add -> {
                 findNavController().navigate(R.id.action_kegiatanKetuaFragment_to_addKegiatanFragment)
             }
+
             R.id.iv_back -> {
                 findNavController().navigate(R.id.action_kegiatanKetuaFragment_to_profileFragment)
             }

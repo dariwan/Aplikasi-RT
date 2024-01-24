@@ -1,5 +1,6 @@
 package com.rt04.myapplication.presentation.finance.pengeluaran
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,11 +22,10 @@ class SpendingFragment : Fragment(), View.OnClickListener {
     private lateinit var spendingList: ArrayList<Spending>
     private var db = Firebase.firestore
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentSpendingBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -44,6 +44,7 @@ class SpendingFragment : Fragment(), View.OnClickListener {
         binding
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupView() {
         var spending = 0.0
 
@@ -80,7 +81,7 @@ class SpendingFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-        when(p0!!.id){
+        when (p0!!.id) {
             R.id.tv_more -> {
                 findNavController().navigate(R.id.action_financeFragment_to_reportSpendingFragment)
             }
@@ -97,13 +98,9 @@ class SpendingFragment : Fragment(), View.OnClickListener {
             .addOnSuccessListener { result ->
                 binding.progressBar.visibility = View.GONE
 
-                for (document in result){
-                    val spending: Spending? = document.toObject(Spending::class.java)
-                    if (spending != null){
-                        //id
-
-                        spendingList.add(spending)
-                    }
+                for (document in result) {
+                    val spending: Spending = document.toObject(Spending::class.java)
+                    spendingList.add(spending)
                 }
                 val adapter = FinanceSpendingAdapter(spendingList)
                 binding.recyclerView.adapter = adapter

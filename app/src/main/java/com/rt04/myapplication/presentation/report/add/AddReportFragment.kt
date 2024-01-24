@@ -42,16 +42,24 @@ class AddReportFragment : Fragment(), View.OnClickListener {
             ActivityResultContracts.RequestPermission()
         ) { isGranted: Boolean ->
             if (isGranted) {
-                Toast.makeText(requireContext(), "Notifications permission granted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Notifications permission granted",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
-                Toast.makeText(requireContext(), "Notifications permission rejected", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Notifications permission rejected",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentAddReportBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -73,13 +81,15 @@ class AddReportFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-        when(p0!!.id){
+        when (p0!!.id) {
             R.id.iv_back -> {
                 findNavController().navigate(R.id.action_addReportFragment_to_reportFragment)
             }
+
             R.id.btn_laporkan -> {
                 buatLaporan()
             }
+
             R.id.btn_upload_image -> {
                 openGaleri()
             }
@@ -92,7 +102,7 @@ class AddReportFragment : Fragment(), View.OnClickListener {
         val nama = binding.namaEditText.text.toString()
         val kategori = binding.spCategory.selectedItem.toString()
 
-        uploadGambar(selectedImageUri!!){imageUrl ->
+        uploadGambar(selectedImageUri!!) { imageUrl ->
             val reportData = hashMapOf(
                 "topik" to topik,
                 "masalah" to masalah,
@@ -107,11 +117,16 @@ class AddReportFragment : Fragment(), View.OnClickListener {
                 .add(reportData)
                 .addOnSuccessListener {
                     showNotification(topik, kategori)
-                    Toast.makeText(requireContext(), "Laporan berhasil dibuat", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Laporan berhasil dibuat", Toast.LENGTH_SHORT)
+                        .show()
                     findNavController().navigate(R.id.action_addReportFragment_to_reportFragment)
                 }
                 .addOnFailureListener { exception ->
-                    Toast.makeText(requireContext(), "Gagal membuat laporan: $exception", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Gagal membuat laporan: $exception",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
         }
     }
@@ -127,14 +142,15 @@ class AddReportFragment : Fragment(), View.OnClickListener {
             PendingIntent.FLAG_IMMUTABLE
         )
 
-        val notificationContent = NotificationCompat.Builder(requireContext(), NOTIFICATION_CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle("Laporan Baru")
-            .setContentText("Topik: $topik, Kategori: $kategori")
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
-            .build()
+        val notificationContent =
+            NotificationCompat.Builder(requireContext(), NOTIFICATION_CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_notification)
+                .setContentTitle("Laporan Baru")
+                .setContentText("Topik: $topik, Kategori: $kategori")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .build()
 
         Log.d("Notification", "Trying to show notification.")
         Log.d("Notification", "Topik: $topik, Kategori: $kategori")
@@ -142,11 +158,12 @@ class AddReportFragment : Fragment(), View.OnClickListener {
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
                 android.Manifest.permission.VIBRATE
-            ) == PackageManager.PERMISSION_GRANTED){
-            with(NotificationManagerCompat.from(requireContext())){
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            with(NotificationManagerCompat.from(requireContext())) {
                 notify(NOTIFICATION_ID, notificationContent)
             }
-        }else{
+        } else {
             ActivityCompat.requestPermissions(
                 requireActivity(),
                 arrayOf(android.Manifest.permission.VIBRATE),
@@ -154,7 +171,6 @@ class AddReportFragment : Fragment(), View.OnClickListener {
             )
         }
     }
-
 
 
     private fun uploadGambar(imageUri: Uri, callback: (String) -> Unit) {
@@ -176,7 +192,8 @@ class AddReportFragment : Fragment(), View.OnClickListener {
                 callback(downloadUri.toString())
             } else {
                 Log.e("Upload Gambar", "Gagal mengunggah gambar: ${task.exception}")
-                Toast.makeText(requireContext(), "Gagal mengunggah gambar", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Gagal mengunggah gambar", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
@@ -190,14 +207,14 @@ class AddReportFragment : Fragment(), View.OnClickListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null){
-            selectedImageUri = data?.data
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
+            selectedImageUri = data.data
             binding.ivUploadImage.setImageURI(selectedImageUri)
         }
     }
 
-    private fun createNotificationChannel(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "Channel Name"
             val descriptionText = "Channel Description"
             val importance = NotificationManager.IMPORTANCE_DEFAULT

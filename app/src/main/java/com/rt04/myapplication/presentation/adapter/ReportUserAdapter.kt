@@ -4,23 +4,25 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.rt04.myapplication.core.data.Kegiatan
 import com.rt04.myapplication.core.data.Report
-import com.rt04.myapplication.databinding.KegiatanKetuaListBinding
 import com.rt04.myapplication.databinding.ReportUpdateListBinding
 
-class ReportUserAdapter(private val reportList: ArrayList<Report>): RecyclerView.Adapter<ReportUserAdapter.MyViewHolder>() {
+class ReportUserAdapter(private val reportList: ArrayList<Report>) :
+    RecyclerView.Adapter<ReportUserAdapter.MyViewHolder>() {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
+
     interface OnItemClickCallback {
         fun onItemClicked(data: Report, action: String)
     }
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
 
-    class MyViewHolder(val binding: ReportUpdateListBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(report: Report){
+    class MyViewHolder(val binding: ReportUpdateListBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(report: Report) {
             binding.tvTittle.text = report.topik
             binding.tvDesc.text = report.masalah
             binding.tvNama.text = report.nama
@@ -32,7 +34,8 @@ class ReportUserAdapter(private val reportList: ArrayList<Report>): RecyclerView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = ReportUpdateListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ReportUpdateListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 

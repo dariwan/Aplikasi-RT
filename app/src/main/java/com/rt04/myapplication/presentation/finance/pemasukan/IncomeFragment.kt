@@ -1,5 +1,6 @@
 package com.rt04.myapplication.presentation.finance.pemasukan
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,12 +21,11 @@ class IncomeFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentIncomeBinding
     private lateinit var incomeList: ArrayList<Income>
     private var db = Firebase.firestore
-    private var selectedIncomeId: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentIncomeBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -40,6 +40,7 @@ class IncomeFragment : Fragment(), View.OnClickListener {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupView() {
         var income = 0.0
 
@@ -88,13 +89,9 @@ class IncomeFragment : Fragment(), View.OnClickListener {
 
                 binding.progressBar.visibility = View.GONE
 
-                for (document in result){
-                    val income: Income? = document.toObject(Income::class.java)
-                    if (income != null){
-                        //id
-
-                        incomeList.add(income)
-                    }
+                for (document in result) {
+                    val income: Income = document.toObject(Income::class.java)
+                    incomeList.add(income)
                 }
                 val adapter = FinanceIncomeAdapter(incomeList)
                 binding.recyclerView.adapter = adapter
@@ -111,7 +108,7 @@ class IncomeFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-        when(p0!!.id){
+        when (p0!!.id) {
             R.id.tv_more -> {
                 findNavController().navigate(R.id.action_financeFragment_to_reportIncomeFragment)
             }

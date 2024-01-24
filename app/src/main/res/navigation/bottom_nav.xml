@@ -57,6 +57,9 @@
         <action
             android:id="@+id/action_profileFragment_to_reportFragment"
             app:destination="@id/reportFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_loginActivity"
+            app:destination="@id/loginActivity" />
     </fragment>
     <fragment
         android:id="@+id/addKegiatanFragment"
@@ -166,4 +169,9 @@
             android:id="@+id/action_updateReportFragment_to_reportFragment"
             app:destination="@id/reportFragment" />
     </fragment>
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.rt04.myapplication.presentation.login.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
 </navigation>

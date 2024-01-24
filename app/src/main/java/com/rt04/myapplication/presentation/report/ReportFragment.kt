@@ -13,12 +13,9 @@ import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import com.rt04.myapplication.R
-import com.rt04.myapplication.core.data.Kegiatan
 import com.rt04.myapplication.core.data.Report
 import com.rt04.myapplication.databinding.FragmentReportBinding
-import com.rt04.myapplication.presentation.adapter.KegiatanRtAdapter
 import com.rt04.myapplication.presentation.adapter.ReportUserAdapter
-import com.rt04.myapplication.presentation.information.kegiatan.update.UpdateKegiatanFragment
 import com.rt04.myapplication.presentation.report.update.UpdateReportFragment.Companion.ID
 import com.rt04.myapplication.presentation.report.update.UpdateReportFragment.Companion.NAME
 
@@ -31,7 +28,7 @@ class ReportFragment : Fragment(), View.OnClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentReportBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -51,26 +48,25 @@ class ReportFragment : Fragment(), View.OnClickListener {
         binding.progressBar.visibility = View.VISIBLE
 
         db.collection("laporan").get()
-            .addOnSuccessListener {result ->
+            .addOnSuccessListener { result ->
                 binding.progressBar.visibility = View.GONE
 
-                for (document in result){
-                    val report: Report? = document.toObject(Report::class.java)
-                    if (report != null){
-                        report.id = document.id
-                        reportList.add(report)
-                    }
+                for (document in result) {
+                    val report: Report = document.toObject(Report::class.java)
+                    report.id = document.id
+                    reportList.add(report)
                 }
                 val adapter = ReportUserAdapter(reportList)
                 binding.rvLaporan.adapter = adapter
                 binding.rvLaporan.layoutManager = LinearLayoutManager(requireContext())
-                adapter.setOnItemClickCallback(object : ReportUserAdapter.OnItemClickCallback{
+                adapter.setOnItemClickCallback(object : ReportUserAdapter.OnItemClickCallback {
                     override fun onItemClicked(data: Report, action: String) {
-                        when(action){
+                        when (action) {
                             "edit" -> {
                                 selectedReportId = data.id
                                 navigateToUpdateFragment(data)
                             }
+
                             "hapus" -> {
                                 selectedReportId = data.id
                                 hapusData()
@@ -98,11 +94,16 @@ class ReportFragment : Fragment(), View.OnClickListener {
                 .addOnSuccessListener {
                     binding.progressBar.visibility = View.GONE
                     setupRv()
-                    Toast.makeText(requireContext(), "Kegiatan berhasil dihapus", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Kegiatan berhasil dihapus",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 .addOnFailureListener {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), "Gagal hapus kegiatan", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Gagal hapus kegiatan", Toast.LENGTH_SHORT)
+                        .show()
                 }
         }
     }

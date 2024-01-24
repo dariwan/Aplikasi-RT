@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
 import com.rt04.myapplication.R
 import com.rt04.myapplication.core.data.Kegiatan
@@ -22,7 +21,7 @@ class UpdateKegiatanFragment : Fragment(), View.OnClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentUpdateKegiatanBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -40,10 +39,11 @@ class UpdateKegiatanFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-        when(p0!!.id){
+        when (p0!!.id) {
             R.id.iv_back -> {
                 findNavController().navigate(R.id.action_updateKegiatanFragment_to_kegiatanKetuaFragment)
             }
+
             R.id.btn_simpan -> {
                 updateKategori()
             }
@@ -75,12 +75,17 @@ class UpdateKegiatanFragment : Fragment(), View.OnClickListener {
                     }
 
 
-                    Toast.makeText(requireContext(), "Kegiatan berhasil diubah", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_updateKegiatanFragment_to_kegiatanKetuaFragment, bundle)
+                    Toast.makeText(requireContext(), "Kegiatan berhasil diubah", Toast.LENGTH_SHORT)
+                        .show()
+                    findNavController().navigate(
+                        R.id.action_updateKegiatanFragment_to_kegiatanKetuaFragment,
+                        bundle
+                    )
                 }
                 .addOnFailureListener {
                     binding.progressBar.visibility = View.VISIBLE
-                    Toast.makeText(requireContext(), "Kegiatan gagal diubah", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Kegiatan gagal diubah", Toast.LENGTH_SHORT)
+                        .show()
                 }
         }
     }

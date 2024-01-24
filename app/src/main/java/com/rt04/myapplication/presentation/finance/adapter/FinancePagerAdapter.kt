@@ -7,7 +7,6 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentStatePagerAdapter
 import com.rt04.myapplication.R
 import com.rt04.myapplication.presentation.finance.pemasukan.IncomeFragment
 import com.rt04.myapplication.presentation.finance.pengeluaran.SpendingFragment
@@ -41,7 +40,7 @@ class FinancePagerAdapter(private val mCtx: Context, fm: FragmentManager, data: 
         return fragment as Fragment
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    override fun getPageTitle(position: Int): CharSequence {
         return mCtx.resources.getString(TAB_TITLES[position])
     }
 

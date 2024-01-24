@@ -4,27 +4,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.NavController
-import androidx.navigation.NavGraph
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.rt04.myapplication.R
-import com.rt04.myapplication.core.utils.SessionManager
 import com.rt04.myapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-    private lateinit var sharedPref: SessionManager
-    private var role: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        sharedPref = SessionManager(this)
-        role = sharedPref.getRole
 
         setupBottomNav()
     }
@@ -34,11 +26,12 @@ class MainActivity : AppCompatActivity() {
         val nav: BottomNavigationView = findViewById(R.id.bottom_navigation)
         nav.itemIconTintList = null
 
-        navController.addOnDestinationChangedListener {_, destination, _ ->
+        navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.homeFragment ||
                 destination.id == R.id.financeFragment ||
                 destination.id == R.id.informationFragment ||
-                destination.id == R.id.profileFragment) {
+                destination.id == R.id.profileFragment
+            ) {
                 showBottomNavigation()
             } else {
                 hideBottomNavigation()

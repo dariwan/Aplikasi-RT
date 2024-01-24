@@ -7,10 +7,11 @@ import com.bumptech.glide.Glide
 import com.rt04.myapplication.core.data.Report
 import com.rt04.myapplication.databinding.ReportListBinding
 
-class ReportAdapter(private val reportList: ArrayList<Report>): RecyclerView.Adapter<ReportAdapter.MyViewHolder>() {
+class ReportAdapter(private val reportList: ArrayList<Report>) :
+    RecyclerView.Adapter<ReportAdapter.MyViewHolder>() {
 
-    class MyViewHolder(val binding: ReportListBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(report: Report){
+    class MyViewHolder(val binding: ReportListBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(report: Report) {
             binding.tvTittle.text = report.topik
             binding.tvDesc.text = report.masalah
             binding.tvNama.text = report.nama

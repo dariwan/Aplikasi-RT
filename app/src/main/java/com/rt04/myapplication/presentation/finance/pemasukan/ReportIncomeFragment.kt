@@ -11,10 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
-import com.google.firebase.firestore.toObject
 import com.rt04.myapplication.R
 import com.rt04.myapplication.core.data.Income
-import com.rt04.myapplication.core.data.Kegiatan
 import com.rt04.myapplication.databinding.FragmentReportIncomeBinding
 import com.rt04.myapplication.presentation.adapter.FinanceIncomeAdapter
 
@@ -22,12 +20,11 @@ class ReportIncomeFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentReportIncomeBinding
     private lateinit var incomeList: ArrayList<Income>
     private var db = Firebase.firestore
-    private var selectedIncomeId: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentReportIncomeBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -49,13 +46,9 @@ class ReportIncomeFragment : Fragment(), View.OnClickListener {
             .addOnSuccessListener { result ->
                 binding.progressBar.visibility = View.GONE
 
-                for (document in result){
-                    val income: Income? = document.toObject(Income::class.java)
-                    if (income != null){
-                        //id
-
-                        incomeList.add(income)
-                    }
+                for (document in result) {
+                    val income: Income = document.toObject(Income::class.java)
+                    incomeList.add(income)
                 }
                 val adapter = FinanceIncomeAdapter(incomeList)
                 binding.rvReport.adapter = adapter
@@ -73,10 +66,11 @@ class ReportIncomeFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-        when(p0!!.id){
+        when (p0!!.id) {
             R.id.button_add -> {
                 findNavController().navigate(R.id.action_reportIncomeFragment_to_addIncomeFragment)
             }
+
             R.id.iv_back -> {
                 findNavController().navigate(R.id.action_reportIncomeFragment_to_financeFragment)
             }

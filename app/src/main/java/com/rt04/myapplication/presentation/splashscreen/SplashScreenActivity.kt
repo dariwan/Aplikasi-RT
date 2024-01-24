@@ -1,20 +1,20 @@
 package com.rt04.myapplication.presentation.splashscreen
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.rt04.myapplication.R
 import com.rt04.myapplication.databinding.ActivitySplashScreenBinding
 import com.rt04.myapplication.presentation.login.LoginActivity
 import com.rt04.myapplication.presentation.main.MainActivity
-import com.rt04.myapplication.presentation.register.RegisterActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashScreenBinding
@@ -32,7 +32,6 @@ class SplashScreenActivity : AppCompatActivity() {
         }
 
         progressBarSetup()
-        //saveLoginInfo()
     }
 
     private fun progressBarSetup() {
@@ -42,19 +41,11 @@ class SplashScreenActivity : AppCompatActivity() {
             .start()
     }
 
-    private fun saveLoginInfo(){
-        val sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.apply(){
-            putBoolean(LoginActivity.IS_LOGIN, true)
-        }.apply()
-    }
-
     override fun onResume() {
         super.onResume()
         val sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, Context.MODE_PRIVATE)
         val isLogin = sharedPreferences.getBoolean(LoginActivity.IS_LOGIN, false)
-        if (isLogin){
+        if (isLogin) {
             val intentToMain = Intent(this@SplashScreenActivity, MainActivity::class.java)
             startActivity(intentToMain)
             finish()

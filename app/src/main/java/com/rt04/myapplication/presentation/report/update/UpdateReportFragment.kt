@@ -16,10 +16,8 @@ import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import com.google.firebase.storage.FirebaseStorage
 import com.rt04.myapplication.R
-import com.rt04.myapplication.core.data.Kegiatan
 import com.rt04.myapplication.core.data.Report
 import com.rt04.myapplication.databinding.FragmentUpdateReportBinding
-import com.rt04.myapplication.presentation.information.kegiatan.update.UpdateKegiatanFragment
 import java.util.UUID
 
 class UpdateReportFragment : Fragment(), View.OnClickListener {
@@ -31,7 +29,7 @@ class UpdateReportFragment : Fragment(), View.OnClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentUpdateReportBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -63,13 +61,15 @@ class UpdateReportFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-        when(p0!!.id){
+        when (p0!!.id) {
             R.id.iv_back -> {
                 findNavController().navigate(R.id.action_updateReportFragment_to_reportFragment)
             }
+
             R.id.btn_laporkan -> {
                 updateReport()
             }
+
             R.id.btn_upload_image -> {
                 openGaleri()
             }
@@ -82,7 +82,7 @@ class UpdateReportFragment : Fragment(), View.OnClickListener {
         val nama = binding.namaEditText.text.toString()
         val kategori = binding.spCategory.selectedItem.toString()
 
-        uploadGambar(selectedImageUri!!){imageUrl ->
+        uploadGambar(selectedImageUri!!) { imageUrl ->
             val reportData = hashMapOf(
                 "topik" to topik,
                 "masalah" to masalah,
@@ -100,11 +100,19 @@ class UpdateReportFragment : Fragment(), View.OnClickListener {
                     .document(reportId)
                     .update(reportData as Map<String, Any>)
                     .addOnSuccessListener {
-                        Toast.makeText(requireContext(), "Laporan berhasil diubah", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Laporan berhasil diubah",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         findNavController().navigate(R.id.action_updateReportFragment_to_reportFragment)
                     }
                     .addOnFailureListener { exception ->
-                        Toast.makeText(requireContext(), "Gagal ubah laporan: $exception", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Gagal ubah laporan: $exception",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
             }
         }
@@ -129,7 +137,8 @@ class UpdateReportFragment : Fragment(), View.OnClickListener {
                 callback(downloadUri.toString())
             } else {
                 Log.e("Upload Gambar", "Gagal mengunggah gambar: ${task.exception}")
-                Toast.makeText(requireContext(), "Gagal mengunggah gambar", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Gagal mengunggah gambar", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
@@ -143,8 +152,8 @@ class UpdateReportFragment : Fragment(), View.OnClickListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null){
-            selectedImageUri = data?.data
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
+            selectedImageUri = data.data
             binding.ivUploadImage.setImageURI(selectedImageUri)
         }
     }

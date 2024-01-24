@@ -1,5 +1,6 @@
 package com.rt04.myapplication.presentation.finance.pemasukan
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -21,12 +22,14 @@ class AddIncomeFragment : Fragment(), DatePickerDialog.OnDateSetListener, View.O
     private lateinit var binding: FragmentAddIncomeBinding
     private val calendar = Calendar.getInstance()
     private var selectedDate: Calendar = Calendar.getInstance()
-    private val formatDate =  SimpleDateFormat("dd - MM - yyyy")
+
+    @SuppressLint("SimpleDateFormat")
+    private val formatDate = SimpleDateFormat("dd - MM - yyyy")
     private var db = Firebase.firestore
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentAddIncomeBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -65,10 +68,11 @@ class AddIncomeFragment : Fragment(), DatePickerDialog.OnDateSetListener, View.O
     }
 
     override fun onClick(p0: View?) {
-        when(p0!!.id){
+        when (p0!!.id) {
             R.id.iv_back -> {
                 findNavController().navigate(R.id.action_addIncomeFragment_to_reportIncomeFragment)
             }
+
             R.id.btn_submit -> {
                 addIncome()
             }
@@ -92,13 +96,15 @@ class AddIncomeFragment : Fragment(), DatePickerDialog.OnDateSetListener, View.O
             .add(addIncome)
             .addOnSuccessListener {
                 binding.progressBar.visibility = View.GONE
-                Toast.makeText(requireContext(), "Data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Data berhasil ditambahkan", Toast.LENGTH_SHORT)
+                    .show()
 
                 findNavController().navigate(R.id.action_addIncomeFragment_to_reportIncomeFragment)
             }
             .addOnFailureListener {
                 binding.progressBar.visibility = View.VISIBLE
-                Toast.makeText(requireContext(), "Data gagal ditambahkan", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Data gagal ditambahkan", Toast.LENGTH_SHORT)
+                    .show()
             }
     }
 

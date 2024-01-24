@@ -10,11 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
-import com.rt04.myapplication.R
 import com.rt04.myapplication.core.data.Kegiatan
 import com.rt04.myapplication.databinding.FragmentKegiatanBinding
 import com.rt04.myapplication.presentation.adapter.KegiatanAdapter
-import com.rt04.myapplication.presentation.adapter.KegiatanRtAdapter
 
 class KegiatanFragment : Fragment() {
 
@@ -25,7 +23,7 @@ class KegiatanFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentKegiatanBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -46,10 +44,10 @@ class KegiatanFragment : Fragment() {
         db.collection("kegiatan").get()
             .addOnSuccessListener {
                 binding.progressBar.visibility = View.GONE
-                if (!it.isEmpty){
-                    for (data in it.documents){
+                if (!it.isEmpty) {
+                    for (data in it.documents) {
                         val kegiatan: Kegiatan? = data.toObject(Kegiatan::class.java)
-                        if (kegiatan != null){
+                        if (kegiatan != null) {
                             kegiatanList.add(kegiatan)
                         }
                     }

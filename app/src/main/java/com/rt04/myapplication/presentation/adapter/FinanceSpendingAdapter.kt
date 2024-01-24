@@ -3,13 +3,14 @@ package com.rt04.myapplication.presentation.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.rt04.myapplication.core.data.Income
 import com.rt04.myapplication.core.data.Spending
 import com.rt04.myapplication.databinding.ReportFinanceListBinding
 
-class FinanceSpendingAdapter(private val spendingList: ArrayList<Spending>): RecyclerView.Adapter<FinanceSpendingAdapter.MyViewHolder>() {
-    class MyViewHolder(val binding: ReportFinanceListBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(spending: Spending){
+class FinanceSpendingAdapter(private val spendingList: ArrayList<Spending>) :
+    RecyclerView.Adapter<FinanceSpendingAdapter.MyViewHolder>() {
+    class MyViewHolder(val binding: ReportFinanceListBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(spending: Spending) {
             val jumlah = spending.jumlah?.toInt()
             binding.nominalFinance.text = jumlah.toString()
             binding.descFinance.text = spending.nama
@@ -18,7 +19,8 @@ class FinanceSpendingAdapter(private val spendingList: ArrayList<Spending>): Rec
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = ReportFinanceListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ReportFinanceListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 

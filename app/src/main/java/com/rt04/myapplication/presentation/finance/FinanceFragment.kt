@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
-import com.rt04.myapplication.R
 import com.rt04.myapplication.databinding.FragmentFinanceBinding
 import com.rt04.myapplication.presentation.finance.adapter.FinancePagerAdapter
 
@@ -20,7 +19,7 @@ class FinanceFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentFinanceBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -44,18 +43,18 @@ class FinanceFragment : Fragment() {
                 spending = calculatedSpending
 
                 val totalWithoutDecimal = (income - spending).toInt()
-                binding.tvTotalFinance.text = "Total: ${totalWithoutDecimal}"
+                binding.tvTotalFinance.text = "Total: $totalWithoutDecimal"
             }
         }
     }
 
-    private fun calculateTotal(collection: String, callback: (Double) -> Unit){
+    private fun calculateTotal(collection: String, callback: (Double) -> Unit) {
         var total = 0.0
         db.collection(collection)
             .get()
             .addOnCompleteListener { task ->
-                if (task.isSuccessful){
-                    for (document in task.result){
+                if (task.isSuccessful) {
+                    for (document in task.result) {
                         val jumlah = document.getDouble("jumlah")
                         jumlah.let {
                             if (it != null) {
@@ -65,8 +64,9 @@ class FinanceFragment : Fragment() {
                     }
                     callback(total)
 
-                } else{
-                    Toast.makeText(requireContext(), "Gagal ${task.exception}", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), "Gagal ${task.exception}", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
             }
@@ -74,7 +74,8 @@ class FinanceFragment : Fragment() {
 
     private fun setupTabLayout() {
         val bundle = Bundle()
-        val sectionsPagerAdapter = FinancePagerAdapter(requireContext(), childFragmentManager, bundle)
+        val sectionsPagerAdapter =
+            FinancePagerAdapter(requireContext(), childFragmentManager, bundle)
         binding.apply {
             viewPager.adapter = sectionsPagerAdapter
             tabLayout.setupWithViewPager(viewPager)

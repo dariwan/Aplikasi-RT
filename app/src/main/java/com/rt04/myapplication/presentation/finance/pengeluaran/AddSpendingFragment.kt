@@ -1,5 +1,6 @@
 package com.rt04.myapplication.presentation.finance.pengeluaran
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -21,13 +22,15 @@ class AddSpendingFragment : Fragment(), DatePickerDialog.OnDateSetListener, View
     private lateinit var binding: FragmentAddSpendingBinding
     private val calendar = Calendar.getInstance()
     private var selectedDate: Calendar = Calendar.getInstance()
-    private val formatDate =  SimpleDateFormat("dd - MM - yyyy")
+
+    @SuppressLint("SimpleDateFormat")
+    private val formatDate = SimpleDateFormat("dd - MM - yyyy")
     private var db = Firebase.firestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentAddSpendingBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -66,10 +69,11 @@ class AddSpendingFragment : Fragment(), DatePickerDialog.OnDateSetListener, View
     }
 
     override fun onClick(p0: View?) {
-        when(p0!!.id){
+        when (p0!!.id) {
             R.id.iv_back -> {
                 findNavController().navigate(R.id.action_addSpendingFragment_to_reportSpendingFragment)
             }
+
             R.id.btn_submit -> {
                 addSpending()
             }
@@ -93,13 +97,15 @@ class AddSpendingFragment : Fragment(), DatePickerDialog.OnDateSetListener, View
             .add(addIncome)
             .addOnSuccessListener {
                 binding.progressBar.visibility = View.GONE
-                Toast.makeText(requireContext(), "Data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Data berhasil ditambahkan", Toast.LENGTH_SHORT)
+                    .show()
 
                 findNavController().navigate(R.id.action_addSpendingFragment_to_reportSpendingFragment)
             }
             .addOnFailureListener {
                 binding.progressBar.visibility = View.VISIBLE
-                Toast.makeText(requireContext(), "Data gagal ditambahkan", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Data gagal ditambahkan", Toast.LENGTH_SHORT)
+                    .show()
             }
     }
 

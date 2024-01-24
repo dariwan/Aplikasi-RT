@@ -10,11 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
-import com.rt04.myapplication.R
-import com.rt04.myapplication.core.data.Kegiatan
 import com.rt04.myapplication.core.data.Report
 import com.rt04.myapplication.databinding.FragmentInformationBinding
-import com.rt04.myapplication.presentation.adapter.KegiatanAdapter
 import com.rt04.myapplication.presentation.adapter.ReportAdapter
 
 class InformationFragment : Fragment() {
@@ -27,7 +24,7 @@ class InformationFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentInformationBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -47,10 +44,10 @@ class InformationFragment : Fragment() {
         db.collection("laporan").get()
             .addOnSuccessListener {
                 binding.progressBar.visibility = View.GONE
-                if (!it.isEmpty){
-                    for (data in it.documents){
+                if (!it.isEmpty) {
+                    for (data in it.documents) {
                         val report: Report? = data.toObject(Report::class.java)
-                        if (report != null){
+                        if (report != null) {
                             reportList.add(report)
                         }
                     }

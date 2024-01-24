@@ -8,19 +8,22 @@ import com.rt04.myapplication.databinding.KegiatanKetuaListBinding
 
 
 class KegiatanRtAdapter(
-    private val kegiatanList: ArrayList<Kegiatan> ,
-): RecyclerView.Adapter<KegiatanRtAdapter.MyViewHolder>() {
+    private val kegiatanList: ArrayList<Kegiatan>,
+) : RecyclerView.Adapter<KegiatanRtAdapter.MyViewHolder>() {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
+
     interface OnItemClickCallback {
         fun onItemClicked(data: Kegiatan, action: String)
     }
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
 
-    class MyViewHolder(val binding: KegiatanKetuaListBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(kegiatan: Kegiatan){
+    class MyViewHolder(val binding: KegiatanKetuaListBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(kegiatan: Kegiatan) {
             binding.tvTittle.text = kegiatan.topik
             binding.tvDesc.text = kegiatan.deskripsi
             binding.tvTempat.text = kegiatan.tempat
@@ -28,7 +31,8 @@ class KegiatanRtAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = KegiatanKetuaListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            KegiatanKetuaListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
