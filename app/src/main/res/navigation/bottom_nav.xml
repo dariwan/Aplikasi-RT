@@ -60,6 +60,12 @@
         <action
             android:id="@+id/action_profileFragment_to_loginActivity"
             app:destination="@id/loginActivity" />
+        <action
+            android:id="@+id/action_profileFragment_to_reportIncomeKetuaFragment"
+            app:destination="@id/reportIncomeKetuaFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_reportSpendingKetuaFragment"
+            app:destination="@id/reportSpendingKetuaFragment" />
     </fragment>
     <fragment
         android:id="@+id/addKegiatanFragment"
@@ -126,6 +132,9 @@
         <action
             android:id="@+id/action_addIncomeFragment_to_reportIncomeFragment"
             app:destination="@id/reportIncomeFragment" />
+        <action
+            android:id="@+id/action_addIncomeFragment_to_reportIncomeKetuaFragment"
+            app:destination="@id/reportIncomeKetuaFragment" />
     </fragment>
     <fragment
         android:id="@+id/addSpendingFragment"
@@ -135,6 +144,9 @@
         <action
             android:id="@+id/action_addSpendingFragment_to_reportSpendingFragment"
             app:destination="@id/reportSpendingFragment" />
+        <action
+            android:id="@+id/action_addSpendingFragment_to_reportSpendingKetuaFragment"
+            app:destination="@id/reportSpendingKetuaFragment" />
     </fragment>
     <fragment
         android:id="@+id/reportFragment"
@@ -174,4 +186,28 @@
         android:name="com.rt04.myapplication.presentation.login.LoginActivity"
         android:label="activity_login"
         tools:layout="@layout/activity_login" />
+    <fragment
+        android:id="@+id/reportIncomeKetuaFragment"
+        android:name="com.rt04.myapplication.presentation.finance.pemasukan.ReportIncomeKetuaFragment"
+        android:label="fragment_report_income_ketua"
+        tools:layout="@layout/fragment_report_income_ketua" >
+        <action
+            android:id="@+id/action_reportIncomeKetuaFragment_to_addIncomeFragment"
+            app:destination="@id/addIncomeFragment" />
+        <action
+            android:id="@+id/action_reportIncomeKetuaFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportSpendingKetuaFragment"
+        android:name="com.rt04.myapplication.presentation.finance.pengeluaran.ReportSpendingKetuaFragment"
+        android:label="fragment_report_spending_ketua"
+        tools:layout="@layout/fragment_report_spending_ketua" >
+        <action
+            android:id="@+id/action_reportSpendingKetuaFragment_to_addSpendingFragment"
+            app:destination="@id/addSpendingFragment" />
+        <action
+            android:id="@+id/action_reportSpendingKetuaFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>

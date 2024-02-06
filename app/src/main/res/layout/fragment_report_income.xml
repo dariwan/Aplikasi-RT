@@ -27,29 +27,15 @@
         app:layout_constraintStart_toEndOf="@+id/iv_back"
         app:layout_constraintTop_toTopOf="@+id/iv_back" />
 
-    <Button
-        android:id="@+id/button_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:drawableLeft="@drawable/ic_add"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/tambah_data"
-        android:textColor="@color/black"
-        app:cornerRadius="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18" />
-
     <ImageView
         android:id="@+id/imageView9"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:padding="10dp"
         android:src="@drawable/background_edittext"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_add" />
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_report"

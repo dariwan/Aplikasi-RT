@@ -4,56 +4,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.finance.pengeluaran.ReportSpendingFragment">
+    tools:context=".presentation.finance.pengeluaran.ReportSpendingKetuaFragment">
 
     <ImageView
         android:id="@+id/iv_back"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="@string/pengeluaran_belakangan_ini"
-        android:textSize="17sp"
+        android:text="@string/report_pengeluaran"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/iv_back"
         app:layout_constraintStart_toEndOf="@+id/iv_back"
         app:layout_constraintTop_toTopOf="@+id/iv_back" />
 
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:padding="10dp"
-        android:src="@drawable/background_edittext"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#49C805"
+        android:drawableLeft="@drawable/ic_add"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="left|center"
+        android:text="Tambah"
+        android:textColor="@color/black"
+        app:cornerRadius="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_back" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_report"
+        android:id="@+id/rv_spending_ketua"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView9"
+        android:padding="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView9"
-        tools:listitem="@layout/report_finance_list" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_add"
+        tools:listitem="@layout/finance_ketua_list" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView9"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

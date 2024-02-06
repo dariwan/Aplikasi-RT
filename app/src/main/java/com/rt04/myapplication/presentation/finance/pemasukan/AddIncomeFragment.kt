@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import com.rt04.myapplication.R
+import com.rt04.myapplication.core.data.Income
 import com.rt04.myapplication.databinding.FragmentAddIncomeBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -99,7 +100,7 @@ class AddIncomeFragment : Fragment(), DatePickerDialog.OnDateSetListener, View.O
                 Toast.makeText(requireContext(), "Data berhasil ditambahkan", Toast.LENGTH_SHORT)
                     .show()
 
-                findNavController().navigate(R.id.action_addIncomeFragment_to_reportIncomeFragment)
+                findNavController().navigate(R.id.action_addIncomeFragment_to_reportIncomeKetuaFragment)
             }
             .addOnFailureListener {
                 binding.progressBar.visibility = View.VISIBLE

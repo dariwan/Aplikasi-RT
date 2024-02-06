@@ -61,16 +61,11 @@ class ReportIncomeFragment : Fragment(), View.OnClickListener {
     }
 
     private fun setupButton() {
-        binding.buttonAdd.setOnClickListener(this)
         binding.ivBack.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
         when (p0!!.id) {
-            R.id.button_add -> {
-                findNavController().navigate(R.id.action_reportIncomeFragment_to_addIncomeFragment)
-            }
-
             R.id.iv_back -> {
                 findNavController().navigate(R.id.action_reportIncomeFragment_to_financeFragment)
             }

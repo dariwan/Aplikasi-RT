@@ -100,7 +100,7 @@ class AddSpendingFragment : Fragment(), DatePickerDialog.OnDateSetListener, View
                 Toast.makeText(requireContext(), "Data berhasil ditambahkan", Toast.LENGTH_SHORT)
                     .show()
 
-                findNavController().navigate(R.id.action_addSpendingFragment_to_reportSpendingFragment)
+                findNavController().navigate(R.id.action_addSpendingFragment_to_reportSpendingKetuaFragment)
             }
             .addOnFailureListener {
                 binding.progressBar.visibility = View.VISIBLE

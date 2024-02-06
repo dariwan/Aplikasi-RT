@@ -66,6 +66,8 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                         binding.btnAdd.visibility = View.GONE
                     } else {
                         binding.btnAdd.visibility = View.VISIBLE
+                        binding.btnIncome.visibility = View.VISIBLE
+                        binding.btnSpending.visibility = View.VISIBLE
                     }
                 }
         }
@@ -76,12 +78,8 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         binding.btnLaporan.setOnClickListener(this)
         binding.btnLogout.setOnClickListener(this)
         binding.ivPhotoProfile.setOnClickListener(this)
-
-        if (category == "Warga") {
-            binding.btnAdd.visibility = View.GONE
-        } else {
-            binding.btnAdd.visibility = View.VISIBLE
-        }
+        binding.btnIncome.setOnClickListener(this)
+        binding.btnSpending.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
@@ -92,6 +90,14 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
             R.id.btn_laporan -> {
                 findNavController().navigate(R.id.action_profileFragment_to_reportFragment)
+            }
+
+            R.id.btn_income -> {
+                findNavController().navigate(R.id.action_profileFragment_to_reportIncomeKetuaFragment)
+            }
+
+            R.id.btn_spending -> {
+                findNavController().navigate(R.id.action_profileFragment_to_reportSpendingKetuaFragment)
             }
 
             R.id.btn_logout -> {

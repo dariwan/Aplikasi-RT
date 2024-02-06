@@ -95,4 +95,7 @@
     <string name="nama_pelapor_1">Nama Pelapor :</string>
     <string name="bukti_foto">Bukti Foto</string>
     <string name="rt_04">RT 04</string>
+    <string name="keuanganku">Keuanganku</string>
+    <string name="report_pemasukan">Report Pemasukan</string>
+    <string name="report_pengeluaran">Report Pengeluaran</string>
 </resources>
