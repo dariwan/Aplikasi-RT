@@ -41,14 +41,14 @@ class SplashScreenActivity : AppCompatActivity() {
             .start()
     }
 
-    override fun onResume() {
-        super.onResume()
-        val sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, Context.MODE_PRIVATE)
-        val isLogin = sharedPreferences.getBoolean(LoginActivity.IS_LOGIN, false)
-        if (isLogin) {
-            val intentToMain = Intent(this@SplashScreenActivity, MainActivity::class.java)
-            startActivity(intentToMain)
-            finish()
-        }
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        val sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, Context.MODE_PRIVATE)
+//        val isLogin = sharedPreferences.getBoolean(LoginActivity.IS_LOGIN, false)
+//        if (isLogin) {
+//            val intentToMain = Intent(this@SplashScreenActivity, MainActivity::class.java)
+//            startActivity(intentToMain)
+//            finish()
+//        }
+//    }
 }

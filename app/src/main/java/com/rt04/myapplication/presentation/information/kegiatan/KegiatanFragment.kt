@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
+import com.rt04.myapplication.R
 import com.rt04.myapplication.core.data.Kegiatan
 import com.rt04.myapplication.databinding.FragmentKegiatanBinding
 import com.rt04.myapplication.presentation.adapter.KegiatanAdapter
@@ -32,7 +34,13 @@ class KegiatanFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRv()
+        setupButton()
+    }
 
+    private fun setupButton() {
+        binding.ivBack.setOnClickListener {
+            findNavController().navigate(R.id.action_kegiatanFragment_to_homeFragment)
+        }
     }
 
     private fun setupRv() {

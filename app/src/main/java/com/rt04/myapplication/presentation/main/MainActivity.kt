@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.rt04.myapplication.R
 import com.rt04.myapplication.databinding.ActivityMainBinding
@@ -30,7 +32,8 @@ class MainActivity : AppCompatActivity() {
             if (destination.id == R.id.homeFragment ||
                 destination.id == R.id.financeFragment ||
                 destination.id == R.id.informationFragment ||
-                destination.id == R.id.profileFragment
+                destination.id == R.id.profileFragment ||
+                destination.id == R.id.searchFragment
             ) {
                 showBottomNavigation()
             } else {

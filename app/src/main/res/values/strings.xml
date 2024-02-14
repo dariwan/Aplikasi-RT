@@ -21,8 +21,8 @@
     <string name="halo_user">Halo, </string>
     <string name="informasi_kegiatan">Informasi Kegiatan</string>
     <string name="content_1">Pada bagian ini setiap warga bisa\nmelihat informasi kegiatan\npada RT 04.</string>
-    <string name="informasi_lingkungan">Informasi Lingkungan</string>
-    <string name="content_2">Apabila ada aktifitas mencurigakan\nwarga bisa menulis dibagian sini.</string>
+    <string name="informasi_lingkungan">Informasi Laporan Lingkungan</string>
+    <string name="content_2">Apabila ada aktifitas mencurigakan\ndi lingkungan RT 04,\nwarga bisa menulis dibagian sini.</string>
     <string name="informasi_keuangan">Informasi Keuangan</string>
     <string name="content_3">Setiap warga bisa melihat informasi\nkeuangan RT 04 secara transparan.</string>
     <string name="profilku">Profilku</string>
@@ -98,4 +98,11 @@
     <string name="keuanganku">Keuanganku</string>
     <string name="report_pemasukan">Report Pemasukan</string>
     <string name="report_pengeluaran">Report Pengeluaran</string>
+    <string name="pencarian">Pencarian</string>
+    <string name="rs_bekasi">Rs Bekasi</string>
+    <string name="detail">Detail</string>
+    <string name="alamat">alamat\nalamat\nalamat\nalamat\nalamat</string>
+    <string name="_099999999999">099999999999</string>
+    <string name="ke_website">Ke Website</string>
+    <string name="laporan_warga_rt_04">Laporan Warga RT 04</string>
 </resources>

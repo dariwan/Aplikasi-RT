@@ -7,20 +7,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
+import com.rt04.myapplication.R
 import com.rt04.myapplication.databinding.FragmentFinanceBinding
+import com.rt04.myapplication.databinding.FragmentHomeBinding
 import com.rt04.myapplication.presentation.finance.adapter.FinancePagerAdapter
 
 class FinanceFragment : Fragment() {
-    private lateinit var binding: FragmentFinanceBinding
+    private var _binding: FragmentFinanceBinding? = null
+    private val binding get() = _binding!!
     private var db = Firebase.firestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentFinanceBinding.inflate(layoutInflater)
+        _binding = FragmentFinanceBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -82,5 +86,9 @@ class FinanceFragment : Fragment() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 
 }

@@ -6,35 +6,54 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.NavOptions
+import androidx.navigation.NavOptionsBuilder
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
-import com.rt04.myapplication.core.data.Kegiatan
+import com.rt04.myapplication.R
 import com.rt04.myapplication.databinding.FragmentHomeBinding
-import com.rt04.myapplication.presentation.adapter.KegiatanAdapter
 
 class HomeFragment : Fragment() {
-    private lateinit var binding: FragmentHomeBinding
-    private lateinit var kegiatanList: ArrayList<Kegiatan>
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
     private var db = Firebase.firestore
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupView()
-        setupRv()
         setUsername()
+        setupButton()
+    }
+
+    private fun setupButton() {
+        binding.cardFinanceInformation.setOnClickListener {
+//            findNavController().navigate(R.id.action_homeFragment_to_financeFragment)
+            findNavController().navigate(R.id.financeFragment,
+                null,
+                NavOptions.Builder()
+                    .setPopUpTo(R.id.homeFragment, true)
+                    .build())
+        }
+        binding.cardActivitiesInformation.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_kegiatanFragment)
+        }
+        binding.cardEnvironmentalInformation.setOnClickListener {
+            findNavController().navigate(R.id.informationFragment,
+                null,
+                NavOptions.Builder()
+                    .setPopUpTo(R.id.homeFragment, true)
+                    .build())
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -55,38 +74,8 @@ class HomeFragment : Fragment() {
         }
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun setupView() {
-
-    }
-
-
-    private fun setupRv() {
-        kegiatanList = arrayListOf()
-        db = FirebaseFirestore.getInstance()
-
-        binding.progressBar.visibility = View.VISIBLE
-
-        db.collection("kegiatan").get()
-            .addOnSuccessListener {
-                binding.progressBar.visibility = View.GONE
-                if (!it.isEmpty) {
-                    for (data in it.documents) {
-                        val kegiatan: Kegiatan? = data.toObject(Kegiatan::class.java)
-                        if (kegiatan != null) {
-                            kegiatanList.add(kegiatan)
-                        }
-                    }
-                    val adapter = KegiatanAdapter(kegiatanList)
-                    binding.rvKegiatan.adapter = adapter
-                    binding.rvKegiatan.layoutManager = LinearLayoutManager(requireContext())
-                }
-            }
-            .addOnFailureListener {
-                binding.progressBar.visibility = View.VISIBLE
-                Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
-            }
-    }
-
-
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        _binding = null
+//    }
 }

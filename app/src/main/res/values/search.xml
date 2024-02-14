@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tittle">
+        <item>RSUD JATISAMPURNA</item>
+        <item>RS KARTIKA HUSADA</item>
+        <item>Polres Bekasi Kota</item>
+        <item>Kantor Pemadam Kebakaran Kota Bekasi</item>
+        <item>Kantor Pemadam Kebakaran Jatisampurna</item>
+    </string-array>
+
+    <string-array name="link">
+        <item>https://rsudjatisampurna.bekasikota.go.id/</item>
+        <item>https://www.kartikahusadagroup.com/</item>
+        <item>https://polresmetrobekasikota.com/home/</item>
+        <item>https://g.co/kgs/mLQzdyZ</item>
+        <item>https://g.co/kgs/zTUykg2</item>
+    </string-array>
+</resources>

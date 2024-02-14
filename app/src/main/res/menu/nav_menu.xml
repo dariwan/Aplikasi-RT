@@ -17,6 +17,11 @@
         android:title="@string/information"/>
 
     <item
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/ic_search_selector"
+        android:title="@string/information"/>
+
+    <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_profile_selector"
         android:title="@string/profile"/>
