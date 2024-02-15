@@ -20,11 +20,11 @@
     <string name="buat_sekarang">Buat Sekarang</string>
     <string name="halo_user">Halo, </string>
     <string name="informasi_kegiatan">Informasi Kegiatan</string>
-    <string name="content_1">Pada bagian ini setiap warga bisa\nmelihat informasi kegiatan\npada RT 04.</string>
+    <string name="content_1">Pada bagian ini setiap warga bisa melihat informasi kegiatan pada RT 04.</string>
     <string name="informasi_lingkungan">Informasi Laporan Lingkungan</string>
-    <string name="content_2">Apabila ada aktifitas mencurigakan\ndi lingkungan RT 04,\nwarga bisa menulis dibagian sini.</string>
+    <string name="content_2">Apabila ada aktifitas mencurigakan di lingkungan RT 04, warga bisa menulis dibagian sini.</string>
     <string name="informasi_keuangan">Informasi Keuangan</string>
-    <string name="content_3">Setiap warga bisa melihat informasi\nkeuangan RT 04 secara transparan.</string>
+    <string name="content_3">Setiap warga bisa melihat informasi keuangan RT 04 secara transparan.</string>
     <string name="profilku">Profilku</string>
     <string name="john_dou">John Dou</string>
     <string name="john_gmail_com">john@gmail.com</string>

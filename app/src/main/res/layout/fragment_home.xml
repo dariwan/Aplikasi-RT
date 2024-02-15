@@ -81,14 +81,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="230dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/content_1"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@id/tvHealthyMenu"
                 app:layout_constraintTop_toBottomOf="@id/tvHealthyMenu"
                 app:layout_constraintVertical_bias="0.0" />
@@ -135,14 +133,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="230dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/content_2"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@id/tv_environment"
                 app:layout_constraintTop_toBottomOf="@id/tv_environment"
                 app:layout_constraintVertical_bias="0.0" />
@@ -190,14 +186,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="230dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/content_3"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@id/tv_finance"
                 app:layout_constraintTop_toBottomOf="@id/tv_finance"
                 app:layout_constraintVertical_bias="0.0" />
