@@ -33,7 +33,6 @@ class DetailFragment : Fragment() {
 
     private fun setupButton() {
         binding.ivBack.setOnClickListener {
-            val bundle = Bundle()
             findNavController().navigate(R.id.action_detailFragment_to_searchFragment)
         }
     }
@@ -42,6 +41,8 @@ class DetailFragment : Fragment() {
         val data = arguments?.getParcelable<Search>(DATA_LIST)
         data.let {
             binding.tvTittle.text = it?.tittle
+            binding.tvAddress.text = "Alamat: ${it?.adress}"
+            binding.tvPhoneNumber.text = "Telephone: ${it?.phone_number}"
             val url = it?.link
             binding.btnToWeb.setOnClickListener {
                 val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))

@@ -70,12 +70,14 @@ class SearchFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable?) {
                 if (s.isNullOrBlank()) {
-                    searchViewModel.search("", emptyArray(), emptyArray())
+                    searchViewModel.search("", emptyArray(), emptyArray(), emptyArray(), emptyArray())
                 } else {
                     val query = s.toString().lowercase(Locale.ROOT)
                     val title = resources.getStringArray(R.array.tittle)
                     val link = resources.getStringArray(R.array.link)
-                    searchViewModel.search(query, title, link)
+                    val adress = resources.getStringArray(R.array.adress)
+                    val phone_number = resources.getStringArray(R.array.phone_number)
+                    searchViewModel.search(query, title, link, adress, phone_number)
                 }
             }
 

@@ -15,4 +15,20 @@
         <item>https://g.co/kgs/mLQzdyZ</item>
         <item>https://g.co/kgs/zTUykg2</item>
     </string-array>
+
+    <string-array name="adress">
+        <item>Jalan Raya Kranggan No 26 Kecamatan Jatisampurna Kota Bekasi 17433</item>
+        <item>Jl. Raya Jatiasih No. 72 Kel. Jatiasih Kec. Jatiasih Kota Bekasi</item>
+        <item>Jl. Pangeran Jayakarta, RT.001/RW.006, Harapan Mulya, Kecamatan Medan Satria, Kota Bks, Jawa Barat 17143</item>
+        <item>Jalan Komodo Raya No.1 Kranji Bekasi Barat, RT.006/RW.004, Kayuringin Jaya, Kec. Bekasi Sel., Kota Bks, Jawa Barat 17135</item>
+        <item>Jl. Raya Kranggan, RT.016/RW.015, Jatisampurna, Kec. Jatisampurna, Kota Bks, Jawa Barat 17433 </item>
+    </string-array>
+
+    <string-array name="phone_number">
+        <item>021-22817282</item>
+        <item>0858-1989-1994</item>
+        <item>021-8841110</item>
+        <item>021-88957805</item>
+        <item>021-88957805</item>
+    </string-array>
 </resources>
