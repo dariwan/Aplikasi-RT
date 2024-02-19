@@ -37,7 +37,6 @@ class HomeFragment : Fragment() {
 
     private fun setupButton() {
         binding.cardFinanceInformation.setOnClickListener {
-//            findNavController().navigate(R.id.action_homeFragment_to_financeFragment)
             findNavController().navigate(R.id.financeFragment,
                 null,
                 NavOptions.Builder()
@@ -74,8 +73,4 @@ class HomeFragment : Fragment() {
         }
     }
 
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        _binding = null
-//    }
 }
