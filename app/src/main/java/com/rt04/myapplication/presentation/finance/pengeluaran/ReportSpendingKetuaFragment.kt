@@ -1,5 +1,6 @@
 package com.rt04.myapplication.presentation.finance.pengeluaran
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -74,27 +75,43 @@ class ReportSpendingKetuaFragment : Fragment(), View.OnClickListener {
     }
 
     private fun hapusData() {
-        binding.progressBar.visibility = View.VISIBLE
 
-        val pemasukanId = selectedFinanceId
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Konformasi Hapus?")
+        builder.setMessage("Apakah Anda yakin ingin menghapus data ini?")
 
-        if (pemasukanId != null){
-            db.collection("pengeluaran").document(pemasukanId).delete()
-                .addOnSuccessListener {
-                    binding.progressBar.visibility = View.GONE
-                    setupRv()
-                    Toast.makeText(
-                        requireContext(),
-                        "Berhasil dihapus",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                .addOnFailureListener {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), "Gagal hapus", Toast.LENGTH_SHORT)
-                        .show()
-                }
+        builder.setPositiveButton("Hapus") { dialog, which ->
+
+            binding.progressBar.visibility = View.VISIBLE
+
+            val pemasukanId = selectedFinanceId
+
+            if (pemasukanId != null){
+                db.collection("pengeluaran").document(pemasukanId).delete()
+                    .addOnSuccessListener {
+                        binding.progressBar.visibility = View.GONE
+                        setupRv()
+                        Toast.makeText(
+                            requireContext(),
+                            "Berhasil dihapus",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    .addOnFailureListener {
+                        binding.progressBar.visibility = View.GONE
+                        Toast.makeText(requireContext(), "Gagal hapus", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+            }
         }
+
+        builder.setNegativeButton("Batal") { dialog, which ->
+            dialog.dismiss()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
+
     }
 
 

@@ -1,5 +1,6 @@
 package com.rt04.myapplication.presentation.information.kegiatan.add
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -85,28 +86,44 @@ class KegiatanKetuaFragment : Fragment(), View.OnClickListener {
     }
 
     private fun hapusData() {
-        binding.progressBar.visibility = View.VISIBLE
 
-        val kegiatanId = selectedKegiatanId
-        Log.e("hapus", "id: $kegiatanId")
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Konformasi Hapus?")
+        builder.setMessage("Apakah Anda yakin ingin menghapus data ini?")
 
-        if (kegiatanId != null) {
-            db.collection("kegiatan").document(kegiatanId).delete()
-                .addOnSuccessListener {
-                    binding.progressBar.visibility = View.GONE
-                    setupRv()
-                    Toast.makeText(
-                        requireContext(),
-                        "Kegiatan berhasil dihapus",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                .addOnFailureListener {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), "Gagal hapus kegiatan", Toast.LENGTH_SHORT)
-                        .show()
-                }
+        builder.setPositiveButton("Hapus") { dialog, which ->
+
+            binding.progressBar.visibility = View.VISIBLE
+
+            val kegiatanId = selectedKegiatanId
+            Log.e("hapus", "id: $kegiatanId")
+
+            if (kegiatanId != null) {
+                db.collection("kegiatan").document(kegiatanId).delete()
+                    .addOnSuccessListener {
+                        binding.progressBar.visibility = View.GONE
+                        setupRv()
+                        Toast.makeText(
+                            requireContext(),
+                            "Kegiatan berhasil dihapus",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    .addOnFailureListener {
+                        binding.progressBar.visibility = View.GONE
+                        Toast.makeText(requireContext(), "Gagal hapus kegiatan", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+            }
         }
+
+        builder.setNegativeButton("Batal") { dialog, which ->
+            dialog.dismiss()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
+
     }
 
     private fun navigateToUpdateFragment(data: Kegiatan) {
