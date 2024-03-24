@@ -1,5 +1,6 @@
 package com.rt04.myapplication.presentation.finance.pemasukan
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -72,27 +73,41 @@ class ReportIncomeKetuaFragment : Fragment(), View.OnClickListener {
     }
 
     private fun hapusData() {
-        binding.progressBar.visibility = View.VISIBLE
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Konformasi Hapus?")
+        builder.setMessage("Apakah Anda yakin ingin menghapus data ini?")
 
-        val pemasukanId = selectedFinanceId
+        builder.setPositiveButton("Hapus"){ dialog, which ->
+            binding.progressBar.visibility = View.VISIBLE
 
-        if (pemasukanId != null){
-            db.collection("pemasukan").document(pemasukanId).delete()
-                .addOnSuccessListener {
-                    binding.progressBar.visibility = View.GONE
-                    setupRv()
-                    Toast.makeText(
-                        requireContext(),
-                        "Berhasil dihapus",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                .addOnFailureListener {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), "Gagal hapus", Toast.LENGTH_SHORT)
-                        .show()
-                }
+            val pemasukanId = selectedFinanceId
+
+            if (pemasukanId != null){
+                db.collection("pemasukan").document(pemasukanId).delete()
+                    .addOnSuccessListener {
+                        binding.progressBar.visibility = View.GONE
+                        setupRv()
+                        Toast.makeText(
+                            requireContext(),
+                            "Berhasil dihapus",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    .addOnFailureListener {
+                        binding.progressBar.visibility = View.GONE
+                        Toast.makeText(requireContext(), "Gagal hapus", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+            }
         }
+
+        builder.setNegativeButton("Batal") { dialog, which ->
+            dialog.dismiss()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
+
     }
 
     private fun setupButton() {
@@ -111,5 +126,4 @@ class ReportIncomeKetuaFragment : Fragment(), View.OnClickListener {
             }
         }
     }
-
 }

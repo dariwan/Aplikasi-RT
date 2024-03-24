@@ -57,7 +57,7 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="250dp"
+        android:layout_width="220dp"
         android:layout_height="1dp"
         android:background="@color/black"
         app:layout_constraintStart_toStartOf="@+id/tv_username"
@@ -86,7 +86,7 @@
 
     <View
         android:id="@+id/view2"
-        android:layout_width="250dp"
+        android:layout_width="220dp"
         android:layout_height="1dp"
         android:background="@color/black"
         app:layout_constraintStart_toStartOf="@+id/tv_email"
@@ -115,7 +115,7 @@
 
     <View
         android:id="@+id/view3"
-        android:layout_width="250dp"
+        android:layout_width="220dp"
         android:layout_height="1dp"
         android:background="@color/black"
         app:layout_constraintStart_toStartOf="@+id/tv_category"
@@ -123,7 +123,7 @@
 
     <Button
         android:id="@+id/btn_add"
-        android:layout_width="250dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/kegiatanku"
@@ -136,7 +136,7 @@
 
     <Button
         android:id="@+id/btn_laporan"
-        android:layout_width="250dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins_bold"
@@ -149,7 +149,7 @@
 
     <Button
         android:id="@+id/btn_income"
-        android:layout_width="250dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins_bold"
@@ -162,7 +162,7 @@
 
     <Button
         android:id="@+id/btn_spending"
-        android:layout_width="250dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins_bold"
