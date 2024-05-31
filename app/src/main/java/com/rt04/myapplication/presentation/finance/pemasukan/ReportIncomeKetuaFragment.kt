@@ -74,7 +74,7 @@ class ReportIncomeKetuaFragment : Fragment(), View.OnClickListener {
 
     private fun hapusData() {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Konformasi Hapus?")
+        builder.setTitle("Konfirmasi Hapus?")
         builder.setMessage("Apakah Anda yakin ingin menghapus data ini?")
 
         builder.setPositiveButton("Hapus"){ dialog, which ->
