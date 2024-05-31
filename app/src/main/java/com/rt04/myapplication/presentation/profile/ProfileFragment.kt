@@ -24,7 +24,6 @@ import com.rt04.myapplication.presentation.login.LoginActivity.Companion.PREFS_N
 class ProfileFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentProfileBinding
-    private var category: String? = null
     private var db = Firebase.firestore
     private var selectedImageUri: Uri? = null
     private val PICK_IMAGE_REQUEST = 1
